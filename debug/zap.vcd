@@ -1,0 +1,2725 @@
+$date
+	Mon Aug 29 21:28:59 2016
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module zap_test $end
+$var wire 1 ! o_write_en $end
+$var wire 32 " o_wr_data [31:0] $end
+$var wire 1 # o_unsigned_halfword_en $end
+$var wire 1 $ o_unsigned_byte_en $end
+$var wire 1 % o_signed_halfword_en $end
+$var wire 1 & o_signed_byte_en $end
+$var wire 1 ' o_read_en $end
+$var wire 32 ( o_pc [31:0] $end
+$var wire 1 ) o_mem_translate $end
+$var wire 1 * o_mem_reset $end
+$var wire 1 + o_irq_ack $end
+$var wire 1 , o_fiq_ack $end
+$var wire 32 - o_cpsr [31:0] $end
+$var wire 32 . o_address [31:0] $end
+$var wire 1 / i_valid $end
+$var wire 32 0 i_rd_data [31:0] $end
+$var wire 32 1 i_instruction [31:0] $end
+$var wire 1 2 i_instr_abort $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 4 i_data_abort $end
+$var reg 1 5 i_clk $end
+$var reg 1 6 i_fiq $end
+$var reg 1 7 i_irq $end
+$var reg 1 8 i_reset $end
+$scope module u_d_cache $end
+$var wire 1 5 i_clk $end
+$var wire 1 8 i_reset $end
+$var wire 1 ! i_wr_en $end
+$var wire 1 * i_recover $end
+$var wire 1 ' i_rd_en $end
+$var wire 32 9 i_data [31:0] $end
+$var wire 32 : i_address [31:0] $end
+$var reg 1 ; o_abort $end
+$var reg 32 < o_data [31:0] $end
+$var reg 1 = o_hit $end
+$var reg 1 > o_miss $end
+$upscope $end
+$scope module u_i_cache $end
+$var wire 1 5 i_clk $end
+$var wire 32 ? i_data [31:0] $end
+$var wire 1 @ i_rd_en $end
+$var wire 1 A i_recover $end
+$var wire 1 8 i_reset $end
+$var wire 1 B i_wr_en $end
+$var wire 32 C i_address [31:0] $end
+$var reg 1 D o_abort $end
+$var reg 32 E o_data [31:0] $end
+$var reg 1 F o_hit $end
+$var reg 1 G o_miss $end
+$upscope $end
+$scope module u_zap_top $end
+$var wire 1 5 i_clk $end
+$var wire 1 4 i_data_abort $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 6 i_fiq $end
+$var wire 1 2 i_instr_abort $end
+$var wire 32 H i_instruction [31:0] $end
+$var wire 1 7 i_irq $end
+$var wire 32 I i_rd_data [31:0] $end
+$var wire 1 8 i_reset $end
+$var wire 1 / i_valid $end
+$var wire 1 * o_mem_reset $end
+$var wire 1 ' o_read_en $end
+$var wire 1 J stall_from_issue $end
+$var wire 1 K stall_from_decode $end
+$var wire 1 L shifter_swi_ff $end
+$var wire 32 M shifter_shifted_source_value_ff [31:0] $end
+$var wire 3 N shifter_shift_operation_ff [2:0] $end
+$var wire 1 O shifter_shift_carry_ff $end
+$var wire 1 P shifter_rrx_ff $end
+$var wire 32 Q shifter_pc_plus_8_ff [31:0] $end
+$var wire 1 R shifter_mem_unsigned_halfword_enable_ff $end
+$var wire 1 S shifter_mem_unsigned_byte_enable_ff $end
+$var wire 1 T shifter_mem_translate_ff $end
+$var wire 1 U shifter_mem_store_ff $end
+$var wire 32 V shifter_mem_srcdest_value_ff [31:0] $end
+$var wire 6 W shifter_mem_srcdest_index_ff [5:0] $end
+$var wire 1 X shifter_mem_signed_halfword_enable_ff $end
+$var wire 1 Y shifter_mem_signed_byte_enable_ff $end
+$var wire 1 Z shifter_mem_pre_index_ff $end
+$var wire 1 [ shifter_mem_load_ff $end
+$var wire 1 \ shifter_irq_ff $end
+$var wire 1 ] shifter_flag_update_ff $end
+$var wire 1 ^ shifter_fiq_ff $end
+$var wire 6 _ shifter_destination_index_ff [5:0] $end
+$var wire 4 ` shifter_condition_code_ff [3:0] $end
+$var wire 32 a shifter_alu_source_value_ff [31:0] $end
+$var wire 5 b shifter_alu_operation_ff [4:0] $end
+$var wire 1 c shifter_abt_ff $end
+$var wire 6 d rd_index_3 [5:0] $end
+$var wire 6 e rd_index_2 [5:0] $end
+$var wire 6 f rd_index_1 [5:0] $end
+$var wire 6 g rd_index_0 [5:0] $end
+$var wire 32 h rd_data_3 [31:0] $end
+$var wire 32 i rd_data_2 [31:0] $end
+$var wire 32 j rd_data_1 [31:0] $end
+$var wire 32 k rd_data_0 [31:0] $end
+$var wire 32 l pc_from_alu [31:0] $end
+$var wire 1 ! o_write_en $end
+$var wire 32 m o_wr_data [31:0] $end
+$var wire 1 # o_unsigned_halfword_en $end
+$var wire 1 $ o_unsigned_byte_en $end
+$var wire 1 % o_signed_halfword_en $end
+$var wire 1 & o_signed_byte_en $end
+$var wire 32 n o_pc [31:0] $end
+$var wire 1 ) o_mem_translate $end
+$var wire 1 + o_irq_ack $end
+$var wire 1 , o_fiq_ack $end
+$var wire 32 o o_cpsr [31:0] $end
+$var wire 32 p o_address [31:0] $end
+$var wire 1 q memory_swi_ff $end
+$var wire 32 r memory_pc_plus_8_ff [31:0] $end
+$var wire 6 s memory_mem_srcdest_index_ff [5:0] $end
+$var wire 1 t memory_mem_load_ff $end
+$var wire 1 u memory_irq_ff $end
+$var wire 1 v memory_instr_abort_ff $end
+$var wire 4 w memory_flags_ff [3:0] $end
+$var wire 1 x memory_fiq_ff $end
+$var wire 6 y memory_destination_index_ff [5:0] $end
+$var wire 1 z memory_dav_ff $end
+$var wire 32 { memory_alu_result_ff [31:0] $end
+$var wire 1 | issue_swi_ff $end
+$var wire 1 } issue_shifter_disable_ff $end
+$var wire 32 ~ issue_shift_source_value_ff [31:0] $end
+$var wire 33 !" issue_shift_source_ff [32:0] $end
+$var wire 3 "" issue_shift_operation_ff [2:0] $end
+$var wire 32 #" issue_shift_length_value_ff [31:0] $end
+$var wire 33 $" issue_shift_length_ff [32:0] $end
+$var wire 32 %" issue_pc_plus_8_ff [31:0] $end
+$var wire 1 &" issue_mem_unsigned_halfword_enable_ff $end
+$var wire 1 '" issue_mem_unsigned_byte_enable_ff $end
+$var wire 1 (" issue_mem_translate_ff $end
+$var wire 1 )" issue_mem_store_ff $end
+$var wire 32 *" issue_mem_srcdest_value_ff [31:0] $end
+$var wire 6 +" issue_mem_srcdest_index_ff [5:0] $end
+$var wire 1 ," issue_mem_signed_halfword_enable_ff $end
+$var wire 1 -" issue_mem_signed_byte_enable_ff $end
+$var wire 1 ." issue_mem_pre_index_ff $end
+$var wire 1 /" issue_mem_load_ff $end
+$var wire 1 0" issue_irq_ff $end
+$var wire 1 1" issue_flag_update_ff $end
+$var wire 1 2" issue_fiq_ff $end
+$var wire 6 3" issue_destination_index_ff [5:0] $end
+$var wire 4 4" issue_condition_code_ff [3:0] $end
+$var wire 32 5" issue_alu_source_value_ff [31:0] $end
+$var wire 33 6" issue_alu_source_ff [32:0] $end
+$var wire 5 7" issue_alu_operation_ff [4:0] $end
+$var wire 1 8" issue_abt_ff $end
+$var wire 1 9" fetch_valid $end
+$var wire 32 :" fetch_pc_plus_8_ff [31:0] $end
+$var wire 32 ;" fetch_instruction [31:0] $end
+$var wire 1 <" fetch_instr_abort $end
+$var wire 1 =" decode_swi_ff $end
+$var wire 33 >" decode_shift_source_ff [32:0] $end
+$var wire 3 ?" decode_shift_operation_ff [2:0] $end
+$var wire 33 @" decode_shift_length_ff [32:0] $end
+$var wire 32 A" decode_pc_plus_8_ff [31:0] $end
+$var wire 1 B" decode_mem_unsigned_halfword_enable_ff $end
+$var wire 1 C" decode_mem_unsigned_byte_enable_ff $end
+$var wire 1 D" decode_mem_translate_ff $end
+$var wire 1 E" decode_mem_store_ff $end
+$var wire 6 F" decode_mem_srcdest_index_ff [5:0] $end
+$var wire 1 G" decode_mem_signed_halfword_enable_ff $end
+$var wire 1 H" decode_mem_signed_byte_enable_ff $end
+$var wire 1 I" decode_mem_pre_index_ff $end
+$var wire 1 J" decode_mem_load_ff $end
+$var wire 1 K" decode_irq_ff $end
+$var wire 1 L" decode_flag_update_ff $end
+$var wire 1 M" decode_fiq_ff $end
+$var wire 6 N" decode_destination_index [5:0] $end
+$var wire 4 O" decode_condition_code [3:0] $end
+$var wire 33 P" decode_alu_source_ff [32:0] $end
+$var wire 5 Q" decode_alu_operation_ff [4:0] $end
+$var wire 1 R" decode_abt_ff $end
+$var wire 1 S" clear_from_writeback $end
+$var wire 1 T" clear_from_alu $end
+$var wire 1 U" alu_swi_ff $end
+$var wire 32 V" alu_pc_plus_8_ff [31:0] $end
+$var wire 6 W" alu_mem_srcdest_index_ff [5:0] $end
+$var wire 1 X" alu_mem_load_ff $end
+$var wire 1 Y" alu_irq_ff $end
+$var wire 4 Z" alu_flags_ff [3:0] $end
+$var wire 1 [" alu_fiq_ff $end
+$var wire 6 \" alu_destination_index_ff [5:0] $end
+$var wire 1 ]" alu_dav_nxt $end
+$var wire 1 ^" alu_dav_ff $end
+$var wire 32 _" alu_alu_result_nxt [31:0] $end
+$var wire 32 `" alu_alu_result_ff [31:0] $end
+$var wire 1 a" alu_abt_ff $end
+$scope module u_zap_alu_main $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 8 i_reset $end
+$var wire 1 L i_swi_ff $end
+$var wire 32 b" i_shifted_source_value_ff [31:0] $end
+$var wire 1 O i_shift_carry_ff $end
+$var wire 1 P i_rrx_ff $end
+$var wire 32 c" i_pc_plus_8_ff [31:0] $end
+$var wire 1 R i_mem_unsigned_halfword_enable_ff $end
+$var wire 1 S i_mem_unsigned_byte_enable_ff $end
+$var wire 1 T i_mem_translate_ff $end
+$var wire 1 U i_mem_store_ff $end
+$var wire 32 d" i_mem_srcdest_value_ff [31:0] $end
+$var wire 6 e" i_mem_srcdest_index_ff [5:0] $end
+$var wire 1 X i_mem_signed_halfword_enable_ff $end
+$var wire 1 Y i_mem_signed_byte_enable_ff $end
+$var wire 1 Z i_mem_pre_index_ff $end
+$var wire 1 [ i_mem_load_ff $end
+$var wire 1 \ i_irq_ff $end
+$var wire 1 ] i_flag_update_ff $end
+$var wire 1 ^ i_fiq_ff $end
+$var wire 6 f" i_destination_index_ff [5:0] $end
+$var wire 32 g" i_cpsr_ff [31:0] $end
+$var wire 4 h" i_condition_code_ff [3:0] $end
+$var wire 1 S" i_clear_from_writeback $end
+$var wire 32 i" i_alu_source_value_ff [31:0] $end
+$var wire 5 j" i_alu_operation_ff [4:0] $end
+$var wire 1 c i_abt_ff $end
+$var reg 4 k" flags_ff [3:0] $end
+$var reg 4 l" flags_nxt [3:0] $end
+$var reg 32 m" mem_address_nxt [31:0] $end
+$var reg 1 a" o_abt_ff $end
+$var reg 32 n" o_alu_result_ff [31:0] $end
+$var reg 32 o" o_alu_result_nxt [31:0] $end
+$var reg 1 T" o_clear_from_alu $end
+$var reg 1 ^" o_dav_ff $end
+$var reg 1 ]" o_dav_nxt $end
+$var reg 6 p" o_destination_index_ff [5:0] $end
+$var reg 1 [" o_fiq_ff $end
+$var reg 4 q" o_flags_ff [3:0] $end
+$var reg 1 Y" o_irq_ff $end
+$var reg 32 r" o_mem_address_ff [31:0] $end
+$var reg 1 X" o_mem_load_ff $end
+$var reg 1 & o_mem_signed_byte_enable_ff $end
+$var reg 1 % o_mem_signed_halfword_enable_ff $end
+$var reg 6 s" o_mem_srcdest_index_ff [5:0] $end
+$var reg 32 t" o_mem_srcdest_value_ff [31:0] $end
+$var reg 1 ! o_mem_store_ff $end
+$var reg 1 ) o_mem_translate_ff $end
+$var reg 1 $ o_mem_unsigned_byte_enable_ff $end
+$var reg 1 # o_mem_unsigned_halfword_enable_ff $end
+$var reg 32 u" o_pc_from_alu [31:0] $end
+$var reg 32 v" o_pc_plus_8_ff [31:0] $end
+$var reg 1 U" o_swi_ff $end
+$var reg 32 w" rm [31:0] $end
+$var reg 32 x" rn [31:0] $end
+$scope function is_cc_satisfied $end
+$var reg 1 y" c $end
+$var reg 4 z" cc [3:0] $end
+$var reg 4 {" fl [3:0] $end
+$var reg 1 |" is_cc_satisfied $end
+$var reg 1 }" n $end
+$var reg 1 ~" ok $end
+$var reg 1 !# v $end
+$var reg 1 "# z $end
+$upscope $end
+$scope function process_arithmetic_instructions $end
+$var reg 4 ## flags [3:0] $end
+$var reg 1 $# i_flag_upd $end
+$var reg 5 %# op [4:0] $end
+$var reg 36 &# process_arithmetic_instructions [35:0] $end
+$var reg 32 '# rm [31:0] $end
+$var reg 32 (# rn [31:0] $end
+$var reg 1 )# rrx $end
+$scope begin blk3 $end
+$var reg 1 *# c $end
+$var reg 4 +# flags_out [3:0] $end
+$var reg 32 ,# rd [31:0] $end
+$upscope $end
+$upscope $end
+$scope function process_logical_instructions $end
+$var reg 4 -# flags [3:0] $end
+$var reg 1 .# i_flag_upd $end
+$var reg 5 /# op [4:0] $end
+$var reg 36 0# process_logical_instructions [35:0] $end
+$var reg 32 1# rm [31:0] $end
+$var reg 32 2# rn [31:0] $end
+$var reg 1 3# rrx $end
+$scope begin blk2 $end
+$var reg 4 4# flags_out [3:0] $end
+$var reg 32 5# rd [31:0] $end
+$var reg 1 6# tmp_carry $end
+$upscope $end
+$upscope $end
+$scope begin blk1 $end
+$var reg 5 7# opcode [4:0] $end
+$var reg 32 8# rd [31:0] $end
+$scope begin blk2 $end
+$var reg 32 9# exp_mask [31:0] $end
+$var integer 32 :# i [31:0] $end
+$upscope $end
+$scope begin blk3 $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module u_zap_decode_main $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 6 i_fiq $end
+$var wire 1 7 i_irq $end
+$var wire 1 8 i_reset $end
+$var wire 1 ;# o_abt_nxt $end
+$var wire 33 <# shift_source_nxt [32:0] $end
+$var wire 33 =# shift_length_nxt [32:0] $end
+$var wire 33 ># o_shift_source_nxt [32:0] $end
+$var wire 3 ?# o_shift_operation_nxt [2:0] $end
+$var wire 33 @# o_shift_length_nxt [32:0] $end
+$var wire 1 A# o_mem_unsigned_halfword_enable_nxt $end
+$var wire 1 B# o_mem_unsigned_byte_enable_nxt $end
+$var wire 1 C# o_mem_translate_nxt $end
+$var wire 1 D# o_mem_store_nxt $end
+$var wire 6 E# o_mem_srcdest_index_nxt [5:0] $end
+$var wire 1 F# o_mem_signed_halfword_enable_nxt $end
+$var wire 1 G# o_mem_signed_byte_enable_nxt $end
+$var wire 1 H# o_mem_pre_index_nxt $end
+$var wire 1 I# o_mem_load_nxt $end
+$var wire 1 J# o_irq_nxt $end
+$var wire 1 K# o_flag_update_nxt $end
+$var wire 1 L# o_fiq_nxt $end
+$var wire 6 M# o_destination_index_nxt [5:0] $end
+$var wire 4 N# o_condition_code_nxt [3:0] $end
+$var wire 33 O# o_alu_source_nxt [32:0] $end
+$var wire 5 P# o_alu_operation_nxt [4:0] $end
+$var wire 5 Q# mem_srcdest_index_nxt [4:0] $end
+$var wire 1 R# mem_irq $end
+$var wire 1 S# mem_instruction_valid $end
+$var wire 35 T# mem_instruction [34:0] $end
+$var wire 1 U# mem_fiq $end
+$var wire 1 V# mem_fetch_stall $end
+$var wire 1 J i_stall_from_issue $end
+$var wire 32 W# i_pc_plus_8_ff [31:0] $end
+$var wire 1 9" i_instruction_valid $end
+$var wire 32 X# i_instruction [31:0] $end
+$var wire 32 Y# i_cpu_mode [31:0] $end
+$var wire 1 S" i_clear_from_writeback $end
+$var wire 1 <" i_abt $end
+$var wire 5 Z# destination_index_nxt [4:0] $end
+$var wire 1 [# bl_instruction_valid $end
+$var wire 35 \# bl_instruction [34:0] $end
+$var wire 1 ]# bl_fetch_stall $end
+$var wire 33 ^# alu_source_nxt [32:0] $end
+$var reg 1 R" o_abt_ff $end
+$var reg 5 _# o_alu_operation_ff [4:0] $end
+$var reg 33 `# o_alu_source_ff [32:0] $end
+$var reg 4 a# o_condition_code_ff [3:0] $end
+$var reg 6 b# o_destination_index_ff [5:0] $end
+$var reg 1 M" o_fiq_ff $end
+$var reg 1 L" o_flag_update_ff $end
+$var reg 1 K" o_irq_ff $end
+$var reg 1 J" o_mem_load_ff $end
+$var reg 1 I" o_mem_pre_index_ff $end
+$var reg 1 H" o_mem_signed_byte_enable_ff $end
+$var reg 1 G" o_mem_signed_halfword_enable_ff $end
+$var reg 6 c# o_mem_srcdest_index_ff [5:0] $end
+$var reg 1 E" o_mem_store_ff $end
+$var reg 1 D" o_mem_translate_ff $end
+$var reg 1 C" o_mem_unsigned_byte_enable_ff $end
+$var reg 1 B" o_mem_unsigned_halfword_enable_ff $end
+$var reg 32 d# o_pc_plus_8_ff [31:0] $end
+$var reg 33 e# o_shift_length_ff [32:0] $end
+$var reg 3 f# o_shift_operation_ff [2:0] $end
+$var reg 33 g# o_shift_source_ff [32:0] $end
+$var reg 1 K o_stall_from_decode $end
+$var reg 1 =" o_swi_ff $end
+$var reg 1 h# o_swi_nxt $end
+$scope function translate $end
+$var reg 5 i# cpu_mode [4:0] $end
+$var reg 5 j# index [4:0] $end
+$var reg 6 k# translate [5:0] $end
+$upscope $end
+$scope module u_zap_bl_fsm $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 8 i_reset $end
+$var wire 1 J i_stall_from_issue $end
+$var wire 1 R# i_irq $end
+$var wire 1 S# i_instruction_valid $end
+$var wire 35 l# i_instruction [34:0] $end
+$var wire 1 U# i_fiq $end
+$var wire 1 S" i_clear_from_writeback $end
+$var reg 1 L# o_fiq $end
+$var reg 35 m# o_instruction [34:0] $end
+$var reg 1 [# o_instruction_valid $end
+$var reg 1 J# o_irq $end
+$var reg 1 ]# o_stall_from_decode $end
+$var reg 1 n# state_ff $end
+$var reg 1 o# state_nxt $end
+$upscope $end
+$scope module u_zap_decode $end
+$var wire 35 p# i_instruction [34:0] $end
+$var wire 1 [# i_instruction_valid $end
+$var reg 5 q# o_alu_operation [4:0] $end
+$var reg 33 r# o_alu_source [32:0] $end
+$var reg 4 s# o_condition_code [3:0] $end
+$var reg 5 t# o_destination_index [4:0] $end
+$var reg 1 K# o_flag_update $end
+$var reg 1 I# o_mem_load $end
+$var reg 1 H# o_mem_pre_index $end
+$var reg 1 G# o_mem_signed_byte_enable $end
+$var reg 1 F# o_mem_signed_halfword_enable $end
+$var reg 5 u# o_mem_srcdest_index [4:0] $end
+$var reg 1 D# o_mem_store $end
+$var reg 1 C# o_mem_translate $end
+$var reg 1 B# o_mem_unsigned_byte_enable $end
+$var reg 1 A# o_mem_unsigned_halfword_enable $end
+$var reg 33 v# o_shift_length [32:0] $end
+$var reg 3 w# o_shift_operation [2:0] $end
+$var reg 33 x# o_shift_source [32:0] $end
+$scope task decode_branch $end
+$upscope $end
+$scope task decode_bx $end
+$scope begin tskDecodeBx $end
+$var reg 32 y# temp [31:0] $end
+$upscope $end
+$upscope $end
+$scope task decode_clz $end
+$scope begin tskDecodeClz $end
+$var reg 32 z# temp [31:0] $end
+$upscope $end
+$upscope $end
+$scope task decode_data_processing $end
+$upscope $end
+$scope task decode_halfword_ls $end
+$scope begin tskDecodeHalfWordLs $end
+$var reg 12 {# temp [11:0] $end
+$var reg 12 |# temp1 [11:0] $end
+$upscope $end
+$upscope $end
+$scope task decode_ls $end
+$scope begin tskDecodeLs $end
+$upscope $end
+$upscope $end
+$scope task decode_mrs $end
+$upscope $end
+$scope task decode_msr $end
+$upscope $end
+$scope task decode_mult $end
+$scope begin tskDecodeMult $end
+$upscope $end
+$upscope $end
+$scope task decode_swi $end
+$scope begin tskDecodeSWI $end
+$upscope $end
+$upscope $end
+$scope task process_immediate $end
+$var reg 12 }# instruction [11:0] $end
+$upscope $end
+$scope task process_instruction_specified_shift $end
+$var reg 34 ~# instruction [33:0] $end
+$upscope $end
+$scope task process_register_specified_shift $end
+$var reg 34 !$ instruction [33:0] $end
+$upscope $end
+$upscope $end
+$scope module u_zap_mem_fsm $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 6 i_fiq $end
+$var wire 1 7 i_irq $end
+$var wire 1 8 i_reset $end
+$var wire 1 "$ writeback $end
+$var wire 1 #$ up $end
+$var wire 1 $$ store $end
+$var wire 4 %$ srcdest [3:0] $end
+$var wire 1 &$ s_bit $end
+$var wire 16 '$ reglist [15:0] $end
+$var wire 1 ($ pre_index $end
+$var wire 1 )$ load $end
+$var wire 1 *$ link $end
+$var wire 3 +$ id [2:0] $end
+$var wire 1 J i_issue_stall $end
+$var wire 1 9" i_instruction_valid $end
+$var wire 32 ,$ i_instruction [31:0] $end
+$var wire 1 S" i_clear_from_writeback $end
+$var wire 4 -$ cc [3:0] $end
+$var wire 12 .$ branch_offset [11:0] $end
+$var wire 4 /$ base [3:0] $end
+$var reg 1 U# o_fiq $end
+$var reg 35 0$ o_instruction [34:0] $end
+$var reg 1 S# o_instruction_valid $end
+$var reg 1 R# o_irq $end
+$var reg 1 V# o_stall_from_decode $end
+$var reg 16 1$ reglist_ff [15:0] $end
+$var reg 16 2$ reglist_nxt [15:0] $end
+$var reg 3 3$ state_ff [2:0] $end
+$var reg 3 4$ state_nxt [2:0] $end
+$scope function map $end
+$var reg 4 5$ base [3:0] $end
+$var reg 4 6$ cc [3:0] $end
+$var reg 4 7$ enc [3:0] $end
+$var reg 3 8$ id [2:0] $end
+$var reg 32 9$ instr [31:0] $end
+$var reg 16 :$ list [15:0] $end
+$var reg 1 ;$ load $end
+$var reg 34 <$ map [33:0] $end
+$var reg 1 =$ pre_index $end
+$var reg 16 >$ reglist [15:0] $end
+$var reg 1 ?$ s_bit $end
+$var reg 4 @$ srcdest [3:0] $end
+$var reg 1 A$ store $end
+$var reg 1 B$ up $end
+$var reg 1 C$ writeback $end
+$upscope $end
+$scope function pri_enc $end
+$var reg 16 D$ in [15:0] $end
+$var reg 4 E$ pri_enc [3:0] $end
+$scope begin priEncFn $end
+$var integer 32 F$ i [31:0] $end
+$upscope $end
+$upscope $end
+$scope begin mem_op_blk_1 $end
+$var reg 4 G$ pri_enc_out [3:0] $end
+$upscope $end
+$scope task clear $end
+$upscope $end
+$upscope $end
+$scope task clear $end
+$upscope $end
+$upscope $end
+$scope module u_zap_fetch_main $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 2 i_instr_abort $end
+$var wire 32 H$ i_instruction [31:0] $end
+$var wire 1 8 i_reset $end
+$var wire 1 K i_stall_from_decode $end
+$var wire 1 / i_valid $end
+$var wire 1 J i_stall_from_issue $end
+$var wire 32 I$ i_pc_ff [31:0] $end
+$var wire 1 S" i_clear_from_writeback $end
+$var reg 1 <" o_instr_abort $end
+$var reg 32 J$ o_instruction [31:0] $end
+$var reg 32 K$ o_pc_plus_8_ff [31:0] $end
+$var reg 1 9" o_valid $end
+$var reg 32 L$ pc_buff [31:0] $end
+$upscope $end
+$scope module u_zap_issue_main $end
+$var wire 1 R" i_abt_ff $end
+$var wire 1 ^" i_alu_dav_ff $end
+$var wire 1 ]" i_alu_dav_nxt $end
+$var wire 6 M$ i_alu_destination_index_ff [5:0] $end
+$var wire 32 N$ i_alu_destination_value_ff [31:0] $end
+$var wire 32 O$ i_alu_destination_value_nxt [31:0] $end
+$var wire 1 X" i_alu_mem_load_ff $end
+$var wire 6 P$ i_alu_mem_srcdest_index_ff [5:0] $end
+$var wire 5 Q$ i_alu_operation_ff [4:0] $end
+$var wire 33 R$ i_alu_source_ff [32:0] $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 4 S$ i_condition_code_ff [3:0] $end
+$var wire 1 3 i_data_stall $end
+$var wire 6 T$ i_destination_index_ff [5:0] $end
+$var wire 1 M" i_fiq_ff $end
+$var wire 1 L" i_flag_update_ff $end
+$var wire 1 K" i_irq_ff $end
+$var wire 1 J" i_mem_load_ff $end
+$var wire 1 I" i_mem_pre_index_ff $end
+$var wire 1 H" i_mem_signed_byte_enable_ff $end
+$var wire 1 G" i_mem_signed_halfword_enable_ff $end
+$var wire 6 U$ i_mem_srcdest_index_ff [5:0] $end
+$var wire 1 E" i_mem_store_ff $end
+$var wire 1 D" i_mem_translate_ff $end
+$var wire 1 C" i_mem_unsigned_byte_enable_ff $end
+$var wire 1 B" i_mem_unsigned_halfword_enable_ff $end
+$var wire 32 V$ i_memory_mem_srcdest_value_ff [31:0] $end
+$var wire 32 W$ i_pc_plus_8_ff [31:0] $end
+$var wire 1 8 i_reset $end
+$var wire 33 X$ i_shift_length_ff [32:0] $end
+$var wire 3 Y$ i_shift_operation_ff [2:0] $end
+$var wire 33 Z$ i_shift_source_ff [32:0] $end
+$var wire 1 =" i_swi_ff $end
+$var wire 6 [$ i_shifter_mem_srcdest_index_ff [5:0] $end
+$var wire 1 [ i_shifter_mem_load_ff $end
+$var wire 6 \$ i_shifter_destination_index_ff [5:0] $end
+$var wire 32 ]$ i_rd_data_3 [31:0] $end
+$var wire 32 ^$ i_rd_data_2 [31:0] $end
+$var wire 32 _$ i_rd_data_1 [31:0] $end
+$var wire 32 `$ i_rd_data_0 [31:0] $end
+$var wire 6 a$ i_memory_mem_srcdest_index_ff [5:0] $end
+$var wire 1 t i_memory_mem_load_ff $end
+$var wire 32 b$ i_memory_destination_value_ff [31:0] $end
+$var wire 6 c$ i_memory_destination_index_ff [5:0] $end
+$var wire 1 z i_memory_dav_ff $end
+$var wire 1 S" i_clear_from_writeback $end
+$var reg 1 d$ load_lock $end
+$var reg 1 e$ lock $end
+$var reg 1 8" o_abt_ff $end
+$var reg 5 f$ o_alu_operation_ff [4:0] $end
+$var reg 33 g$ o_alu_source_ff [32:0] $end
+$var reg 32 h$ o_alu_source_value_ff [31:0] $end
+$var reg 32 i$ o_alu_source_value_nxt [31:0] $end
+$var reg 4 j$ o_condition_code_ff [3:0] $end
+$var reg 6 k$ o_destination_index_ff [5:0] $end
+$var reg 1 2" o_fiq_ff $end
+$var reg 1 1" o_flag_update_ff $end
+$var reg 1 0" o_irq_ff $end
+$var reg 1 /" o_mem_load_ff $end
+$var reg 1 ." o_mem_pre_index_ff $end
+$var reg 1 -" o_mem_signed_byte_enable_ff $end
+$var reg 1 ," o_mem_signed_halfword_enable_ff $end
+$var reg 6 l$ o_mem_srcdest_index_ff [5:0] $end
+$var reg 32 m$ o_mem_srcdest_value_ff [31:0] $end
+$var reg 32 n$ o_mem_srcdest_value_nxt [31:0] $end
+$var reg 1 )" o_mem_store_ff $end
+$var reg 1 (" o_mem_translate_ff $end
+$var reg 1 '" o_mem_unsigned_byte_enable_ff $end
+$var reg 1 &" o_mem_unsigned_halfword_enable_ff $end
+$var reg 32 o$ o_pc_plus_8_ff [31:0] $end
+$var reg 6 p$ o_rd_index_0 [5:0] $end
+$var reg 6 q$ o_rd_index_1 [5:0] $end
+$var reg 6 r$ o_rd_index_2 [5:0] $end
+$var reg 6 s$ o_rd_index_3 [5:0] $end
+$var reg 33 t$ o_shift_length_ff [32:0] $end
+$var reg 32 u$ o_shift_length_value_ff [31:0] $end
+$var reg 32 v$ o_shift_length_value_nxt [31:0] $end
+$var reg 3 w$ o_shift_operation_ff [2:0] $end
+$var reg 33 x$ o_shift_source_ff [32:0] $end
+$var reg 32 y$ o_shift_source_value_ff [31:0] $end
+$var reg 32 z$ o_shift_source_value_nxt [31:0] $end
+$var reg 1 } o_shifter_disable_ff $end
+$var reg 1 {$ o_shifter_disable_nxt $end
+$var reg 1 J o_stall_from_issue $end
+$var reg 1 | o_swi_ff $end
+$var reg 1 |$ shift_lock $end
+$scope function determine_load_lock $end
+$var reg 1 }$ determine_load_lock $end
+$var reg 1 ~$ i_alu_dav_ff $end
+$var reg 1 !% i_alu_dav_nxt $end
+$var reg 1 "% i_alu_mem_load_ff $end
+$var reg 6 #% i_alu_mem_srcdest_index_ff [5:0] $end
+$var reg 1 $% i_shifter_mem_load_ff $end
+$var reg 6 %% i_shifter_mem_srcdest_index_ff [5:0] $end
+$var reg 33 &% index [32:0] $end
+$var reg 4 '% o_condition_code_ff [3:0] $end
+$var reg 1 (% o_mem_load_ff $end
+$var reg 6 )% o_mem_srcdest_index_ff [5:0] $end
+$upscope $end
+$scope function get_register_value $end
+$var reg 32 *% get [31:0] $end
+$var reg 32 +% get_register_value [31:0] $end
+$var reg 1 ,% i_alu_dav_ff $end
+$var reg 1 -% i_alu_dav_nxt $end
+$var reg 6 .% i_alu_destination_index_ff [5:0] $end
+$var reg 32 /% i_alu_destination_value_ff [31:0] $end
+$var reg 32 0% i_alu_destination_value_nxt [31:0] $end
+$var reg 1 1% i_memory_dav_ff $end
+$var reg 6 2% i_memory_destination_index_ff [5:0] $end
+$var reg 33 3% i_shifter_destination_index_ff [32:0] $end
+$var reg 33 4% index [32:0] $end
+$var reg 2 5% rd_port [1:0] $end
+$upscope $end
+$scope function shifter_lock_check $end
+$var reg 33 6% index [32:0] $end
+$var reg 4 7% o_condition_code_ff [3:0] $end
+$var reg 6 8% o_destination_index_ff [5:0] $end
+$var reg 1 9% shifter_lock_check $end
+$upscope $end
+$upscope $end
+$scope module u_zap_memory_main $end
+$var wire 32 :% i_alu_result_ff [31:0] $end
+$var wire 1 5 i_clk $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 ^" i_dav_ff $end
+$var wire 6 ;% i_destination_index_ff [5:0] $end
+$var wire 1 [" i_fiq_ff $end
+$var wire 4 <% i_flags_ff [3:0] $end
+$var wire 1 a" i_instr_abort_ff $end
+$var wire 1 Y" i_irq_ff $end
+$var wire 1 X" i_mem_load_ff $end
+$var wire 6 =% i_mem_srcdest_index_ff [5:0] $end
+$var wire 32 >% i_pc_plus_8_ff [31:0] $end
+$var wire 1 8 i_reset $end
+$var wire 1 U" i_swi_ff $end
+$var wire 1 S" i_clear_from_writeback $end
+$var reg 32 ?% o_alu_result_ff [31:0] $end
+$var reg 1 z o_dav_ff $end
+$var reg 6 @% o_destination_index_ff [5:0] $end
+$var reg 1 x o_fiq_ff $end
+$var reg 4 A% o_flags_ff [3:0] $end
+$var reg 1 v o_instr_abort_ff $end
+$var reg 1 u o_irq_ff $end
+$var reg 1 t o_mem_load_ff $end
+$var reg 6 B% o_mem_srcdest_index_ff [5:0] $end
+$var reg 32 C% o_pc_plus_8_ff [31:0] $end
+$var reg 1 q o_swi_ff $end
+$scope task clear_interrupts $end
+$upscope $end
+$upscope $end
+$scope module u_zap_regf $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 5 i_clk $end
+$var wire 32 D% i_data_abort_vector [31:0] $end
+$var wire 1 4 i_data_abt $end
+$var wire 1 3 i_data_stall $end
+$var wire 1 x i_fiq $end
+$var wire 32 E% i_fiq_vector [31:0] $end
+$var wire 4 F% i_flags [3:0] $end
+$var wire 1 v i_instr_abt $end
+$var wire 32 G% i_instruction_abort_vector [31:0] $end
+$var wire 1 u i_irq $end
+$var wire 32 H% i_irq_vector [31:0] $end
+$var wire 32 I% i_pc_buf_ff [31:0] $end
+$var wire 32 J% i_pc_from_alu [31:0] $end
+$var wire 6 K% i_rd_index_0 [5:0] $end
+$var wire 6 L% i_rd_index_1 [5:0] $end
+$var wire 6 M% i_rd_index_2 [5:0] $end
+$var wire 6 N% i_rd_index_3 [5:0] $end
+$var wire 1 8 i_reset $end
+$var wire 1 K i_stall_from_decode $end
+$var wire 1 J i_stall_from_issue $end
+$var wire 1 q i_swi $end
+$var wire 32 O% i_swi_vector [31:0] $end
+$var wire 1 P% i_und $end
+$var wire 32 Q% i_und_vector [31:0] $end
+$var wire 1 z i_valid $end
+$var wire 32 R% i_wr_data [31:0] $end
+$var wire 32 S% i_wr_data_1 [31:0] $end
+$var wire 6 T% i_wr_index [5:0] $end
+$var wire 6 U% i_wr_index_1 [5:0] $end
+$var reg 1 S" o_clear_from_writeback $end
+$var reg 32 V% o_cpsr [31:0] $end
+$var reg 1 , o_fiq_ack $end
+$var reg 1 + o_irq_ack $end
+$var reg 32 W% o_pc [31:0] $end
+$var reg 32 X% o_rd_data_0 [31:0] $end
+$var reg 32 Y% o_rd_data_1 [31:0] $end
+$var reg 32 Z% o_rd_data_2 [31:0] $end
+$var reg 32 [% o_rd_data_3 [31:0] $end
+$scope begin blk1 $end
+$var integer 32 \% i [31:0] $end
+$upscope $end
+$scope begin otherBlock $end
+$var integer 32 ]% i [31:0] $end
+$upscope $end
+$scope begin rstBlk $end
+$var integer 32 ^% i [31:0] $end
+$upscope $end
+$upscope $end
+$scope module u_zap_shifter_main $end
+$var wire 1 8" i_abt_ff $end
+$var wire 5 _% i_alu_operation_ff [4:0] $end
+$var wire 33 `% i_alu_source_ff [32:0] $end
+$var wire 32 a% i_alu_source_value_ff [31:0] $end
+$var wire 32 b% i_alu_value_nxt [31:0] $end
+$var wire 1 T" i_clear_from_alu $end
+$var wire 1 S" i_clear_from_writeback $end
+$var wire 1 5 i_clk $end
+$var wire 4 c% i_condition_code_ff [3:0] $end
+$var wire 1 3 i_data_stall $end
+$var wire 6 d% i_destination_index_ff [5:0] $end
+$var wire 1 } i_disable_shifter_ff $end
+$var wire 1 2" i_fiq_ff $end
+$var wire 1 1" i_flag_update_ff $end
+$var wire 1 0" i_irq_ff $end
+$var wire 1 /" i_mem_load_ff $end
+$var wire 1 ." i_mem_pre_index_ff $end
+$var wire 1 -" i_mem_signed_byte_enable_ff $end
+$var wire 1 ," i_mem_signed_halfword_enable_ff $end
+$var wire 6 e% i_mem_srcdest_index_ff [5:0] $end
+$var wire 32 f% i_mem_srcdest_value_ff [31:0] $end
+$var wire 1 )" i_mem_store_ff $end
+$var wire 1 (" i_mem_translate_ff $end
+$var wire 1 '" i_mem_unsigned_byte_enable_ff $end
+$var wire 1 &" i_mem_unsigned_halfword_enable_ff $end
+$var wire 32 g% i_pc_plus_8_ff [31:0] $end
+$var wire 1 8 i_reset $end
+$var wire 33 h% i_shift_length_ff [32:0] $end
+$var wire 32 i% i_shift_length_value_ff [31:0] $end
+$var wire 3 j% i_shift_operation_ff [2:0] $end
+$var wire 33 k% i_shift_source_ff [32:0] $end
+$var wire 32 l% i_shift_source_value_ff [31:0] $end
+$var wire 1 | i_swi_ff $end
+$var wire 32 m% shout [31:0] $end
+$var wire 1 n% shcarry $end
+$var wire 1 o% rrx $end
+$var reg 32 p% mem_srcdest_value [31:0] $end
+$var reg 1 c o_abt_ff $end
+$var reg 5 q% o_alu_operation_ff [4:0] $end
+$var reg 32 r% o_alu_source_value_ff [31:0] $end
+$var reg 4 s% o_condition_code_ff [3:0] $end
+$var reg 6 t% o_destination_index_ff [5:0] $end
+$var reg 1 ^ o_fiq_ff $end
+$var reg 1 ] o_flag_update_ff $end
+$var reg 1 \ o_irq_ff $end
+$var reg 1 [ o_mem_load_ff $end
+$var reg 1 Z o_mem_pre_index_ff $end
+$var reg 1 Y o_mem_signed_byte_enable_ff $end
+$var reg 1 X o_mem_signed_halfword_enable_ff $end
+$var reg 6 u% o_mem_srcdest_index_ff [5:0] $end
+$var reg 32 v% o_mem_srcdest_value_ff [31:0] $end
+$var reg 1 U o_mem_store_ff $end
+$var reg 1 T o_mem_translate_ff $end
+$var reg 1 S o_mem_unsigned_byte_enable_ff $end
+$var reg 1 R o_mem_unsigned_halfword_enable_ff $end
+$var reg 32 w% o_pc_plus_8_ff [31:0] $end
+$var reg 1 P o_rrx_ff $end
+$var reg 1 O o_shift_carry_ff $end
+$var reg 3 x% o_shift_operation_ff [2:0] $end
+$var reg 32 y% o_shifted_source_value_ff [31:0] $end
+$var reg 1 L o_swi_ff $end
+$var reg 32 z% rm [31:0] $end
+$var reg 32 {% rn [31:0] $end
+$scope function resolve_conflict $end
+$var reg 33 |% index_from_issue [32:0] $end
+$var reg 6 }% index_from_this_stage [5:0] $end
+$var reg 32 ~% resolve_conflict [31:0] $end
+$var reg 32 !& result_from_alu [31:0] $end
+$var reg 32 "& value_from_issue [31:0] $end
+$upscope $end
+$scope module U_SHIFT $end
+$var wire 8 #& i_amount [7:0] $end
+$var wire 3 $& i_shift_type [2:0] $end
+$var wire 32 %& i_source [31:0] $end
+$var reg 1 n% o_carry $end
+$var reg 32 && o_result [31:0] $end
+$var reg 1 o% o_rrx $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &&
+bx %&
+bx $&
+bx #&
+bx "&
+bx !&
+bx ~%
+bx }%
+bx |%
+bx {%
+bx z%
+bx y%
+bx x%
+bx w%
+bx v%
+bx u%
+bx t%
+bx s%
+bx r%
+bx q%
+bx p%
+xo%
+xn%
+bx m%
+bx l%
+bx k%
+bx j%
+bx i%
+bx h%
+bx g%
+bx f%
+bx e%
+bx d%
+bx c%
+bx b%
+bx a%
+bx `%
+bx _%
+bx ^%
+bx ]%
+b101110 \%
+bx [%
+bx Z%
+bx Y%
+bx X%
+bx W%
+bx V%
+bx U%
+bx T%
+b0 S%
+bx R%
+b10100 Q%
+0P%
+b10000 O%
+bx N%
+bx M%
+bx L%
+bx K%
+bx J%
+bx I%
+b1000 H%
+b1100 G%
+bx F%
+b100 E%
+b0 D%
+bx C%
+bx B%
+bx A%
+bx @%
+bx ?%
+bx >%
+bx =%
+bx <%
+bx ;%
+bx :%
+x9%
+bx 8%
+bx 7%
+bx 6%
+bx 5%
+bx 4%
+bx 3%
+bx 2%
+x1%
+bx 0%
+bx /%
+bx .%
+x-%
+x,%
+bx +%
+bx *%
+bx )%
+x(%
+bx '%
+bx &%
+bx %%
+x$%
+bx #%
+x"%
+x!%
+x~$
+x}$
+x|$
+x{$
+bx z$
+bx y$
+bx x$
+bx w$
+bx v$
+bx u$
+bx t$
+bx s$
+bx r$
+bx q$
+bx p$
+bx o$
+bx n$
+bx m$
+bx l$
+bx k$
+bx j$
+bx i$
+bx h$
+bx g$
+bx f$
+xe$
+xd$
+bx c$
+bx b$
+bx a$
+bx `$
+bx _$
+bx ^$
+bx ]$
+bx \$
+bx [$
+bx Z$
+bx Y$
+bx X$
+bx W$
+b0 V$
+bx U$
+bx T$
+bx S$
+bx R$
+bx Q$
+bx P$
+bx O$
+bx N$
+bx M$
+bx L$
+bx K$
+bx J$
+bx I$
+b0 H$
+bx G$
+bx F$
+bx E$
+bx D$
+xC$
+xB$
+xA$
+bx @$
+x?$
+bx >$
+x=$
+bx <$
+x;$
+bx :$
+bx 9$
+bx 8$
+bx 7$
+bx 6$
+bx 5$
+bx 4$
+bx 3$
+bx 2$
+bx 1$
+bx 0$
+bx /$
+bx .$
+bx -$
+bx ,$
+bx +$
+x*$
+x)$
+x($
+bx '$
+x&$
+bx %$
+x$$
+x#$
+x"$
+bx !$
+bx ~#
+bx }#
+bx |#
+bx {#
+bx z#
+bx y#
+bx x#
+bx w#
+bx v#
+bx u#
+bx t#
+bx s#
+bx r#
+bx q#
+bx p#
+xo#
+xn#
+bx m#
+bx l#
+bx k#
+bx j#
+bx i#
+xh#
+bx g#
+bx f#
+bx e#
+bx d#
+bx c#
+bx b#
+bx a#
+bx `#
+bx _#
+bx ^#
+x]#
+bx \#
+x[#
+bx Z#
+bx Y#
+bx X#
+bx W#
+xV#
+xU#
+bx T#
+xS#
+xR#
+bx Q#
+bx P#
+bx O#
+bx N#
+bx M#
+xL#
+xK#
+xJ#
+xI#
+xH#
+xG#
+xF#
+bx E#
+xD#
+xC#
+xB#
+xA#
+bx @#
+bx ?#
+bx >#
+bx =#
+bx <#
+x;#
+bx :#
+bx 9#
+bx 8#
+bx 7#
+x6#
+bx 5#
+bx 4#
+x3#
+bx 2#
+bx 1#
+bx 0#
+bx /#
+x.#
+bx -#
+bx ,#
+bx +#
+x*#
+x)#
+bx (#
+bx '#
+bx &#
+bx %#
+x$#
+bx ##
+x"#
+x!#
+x~"
+x}"
+x|"
+bx {"
+bx z"
+xy"
+bx x"
+bx w"
+bx v"
+bx u"
+bx t"
+bx s"
+bx r"
+bx q"
+bx p"
+bx o"
+bx n"
+bx m"
+bx l"
+bx k"
+bx j"
+bx i"
+bx h"
+bx g"
+bx f"
+bx e"
+bx d"
+bx c"
+bx b"
+xa"
+bx `"
+bx _"
+x^"
+x]"
+bx \"
+x["
+bx Z"
+xY"
+xX"
+bx W"
+bx V"
+xU"
+xT"
+0S"
+xR"
+bx Q"
+bx P"
+bx O"
+bx N"
+xM"
+xL"
+xK"
+xJ"
+xI"
+xH"
+xG"
+bx F"
+xE"
+xD"
+xC"
+xB"
+bx A"
+bx @"
+bx ?"
+bx >"
+x="
+x<"
+bx ;"
+bx :"
+x9"
+x8"
+bx 7"
+bx 6"
+bx 5"
+bx 4"
+bx 3"
+x2"
+x1"
+x0"
+x/"
+x."
+x-"
+x,"
+bx +"
+bx *"
+x)"
+x("
+x'"
+x&"
+bx %"
+bx $"
+bx #"
+bx ""
+bx !"
+bx ~
+x}
+x|
+bx {
+xz
+bx y
+xx
+bx w
+xv
+xu
+xt
+bx s
+bx r
+xq
+bx p
+bx o
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+bx f
+bx e
+bx d
+xc
+bx b
+bx a
+bx `
+bx _
+x^
+x]
+x\
+x[
+xZ
+xY
+xX
+bx W
+bx V
+xU
+xT
+xS
+xR
+bx Q
+xP
+xO
+bx N
+bx M
+xL
+xK
+xJ
+b0 I
+b0 H
+xG
+xF
+bx E
+xD
+bx C
+0B
+1A
+1@
+b0 ?
+x>
+x=
+bx <
+x;
+bx :
+bx 9
+18
+07
+06
+05
+04
+03
+02
+b0 1
+b0 0
+0/
+bx .
+bx -
+0,
+0+
+0*
+x)
+bx (
+x'
+x&
+x%
+x$
+x#
+bx "
+x!
+$end
+#10
+b0 @#
+b0 >#
+b0 O#
+b0 E#
+b0 M#
+b0 k#
+b10011 i#
+b0 j#
+0A#
+0F#
+0G#
+0B#
+0H#
+0C#
+0D#
+0I#
+b0 Q#
+b0 u#
+0K#
+b0 =#
+b0 v#
+b0 ?#
+b0 w#
+b0 <#
+b0 x#
+b0 P#
+b0 q#
+b0 ^#
+b0 r#
+b0 Z#
+b0 t#
+b1111 N#
+b1111 s#
+b0 {%
+0J
+0L#
+0J#
+0[#
+b0 \#
+b0 m#
+b0 p#
+0K
+0n%
+b0 m%
+b0 &&
+0!%
+b0 n$
+b0 v$
+b0 z$
+b0 i$
+b0 +%
+b0 *%
+0-%
+b0 0%
+0e$
+b0 h
+b0 ]$
+b0 [%
+b0 i
+b0 ^$
+b0 Z%
+b0 j
+b0 _$
+b0 Y%
+b0 k
+b0 `$
+b0 X%
+b0 (
+b0 C
+b0 n
+b0 I$
+b0 W%
+b10011 -
+b10011 o
+b10011 g"
+b10011 Y#
+b10011 V%
+b10000 d
+b10000 s$
+b10000 N%
+b0 e
+b0 r$
+b0 M%
+b0 f
+b0 q$
+b0 L%
+b0 g
+b0 p$
+b0 K%
+b0 .$
+0*$
+b0 '$
+1$$
+0)$
+0"$
+0&$
+0#$
+0($
+b0 +$
+b0 -$
+b0 %$
+b0 /$
+0h#
+0U#
+0R#
+b0 2$
+0S#
+b0 T#
+b0 l#
+b0 0$
+0V#
+b0 4$
+0o#
+0]#
+b0 #&
+0o%
+b0 l
+b0 u"
+b0 J%
+0T"
+b0 p%
+b0 z%
+b0 ~%
+b0 |%
+b0 "&
+b0 }%
+b0 !&
+b0 _"
+b0 o"
+b0 O$
+b0 b%
+b0 m"
+b0 l"
+b0 8#
+b0 0#
+b0 4#
+b0 5#
+b0 2#
+b0 1#
+b0 -#
+b0 /#
+03#
+0.#
+b0 7#
+0]"
+0|"
+0~"
+0}"
+0"#
+0y"
+0!#
+b1111 z"
+b0 {"
+b0 Z"
+b0 q"
+b0 <%
+b0 x"
+b0 w"
+0{$
+0|$
+09%
+b0 6%
+b0 8%
+b1111 7%
+0d$
+0}$
+b0 &%
+b0 )%
+b1111 '%
+0(%
+b0 %%
+0$%
+b0 #%
+0~$
+0"%
+b10000 4%
+b11 5%
+b0 3%
+b0 /%
+b0 .%
+0,%
+b0 2%
+01%
+b101110 \%
+b1000 A"
+b1000 d#
+b1000 W$
+0D"
+0B"
+0G"
+0H"
+0C"
+0I"
+0E"
+0J"
+b10000 F"
+b10000 c#
+b10000 U$
+0L"
+b0 @"
+b0 e#
+b0 X$
+b0 ?"
+b0 f#
+b0 Y$
+b0 >"
+b0 g#
+b0 Z$
+b0 Q"
+b0 _#
+b0 Q$
+b0 P"
+b0 `#
+b0 R$
+b0 N"
+b0 b#
+b0 T$
+b1111 O"
+b1111 a#
+b1111 S$
+0R"
+0="
+0M"
+0K"
+b0 1$
+b0 3$
+b1000 :"
+b1000 W#
+b1000 K$
+b0 L$
+0;#
+0<"
+b0 ;"
+b0 X#
+b0 ,$
+b0 J$
+09"
+0n#
+b0 *"
+b0 m$
+b0 f%
+b0 #"
+b0 u$
+b0 i%
+b0 ~
+b0 y$
+b0 l%
+b0 %&
+b0 5"
+b0 h$
+b0 a%
+b0 $"
+b0 t$
+b0 h%
+b0 !"
+b0 x$
+b0 k%
+b0 6"
+b0 g$
+b0 `%
+0}
+b0 %"
+b0 o$
+b0 g%
+0|
+08"
+02"
+00"
+0("
+0&"
+0,"
+0-"
+0'"
+0."
+0)"
+0/"
+b0 +"
+b0 l$
+b0 e%
+01"
+b0 ""
+b0 w$
+b0 j%
+b0 $&
+b0 7"
+b0 f$
+b0 _%
+b0 3"
+b0 k$
+b0 d%
+b1111 4"
+b1111 j$
+b1111 c%
+0P
+0O
+b0 M
+b0 b"
+b0 y%
+b0 a
+b0 i"
+b0 r%
+b0 V
+b0 d"
+b0 v%
+b0 Q
+b0 c"
+b0 w%
+0L
+0c
+0^
+0\
+0T
+0R
+0X
+0Y
+0S
+0Z
+0U
+0[
+b0 W
+b0 e"
+b0 [$
+b0 u%
+0]
+b0 N
+b0 x%
+b0 b
+b0 j"
+b0 q%
+b0 _
+b0 f"
+b0 \$
+b0 t%
+b1111 `
+b1111 h"
+b1111 s%
+b0 "
+b0 9
+b0 m
+b0 t"
+0)
+0#
+0%
+0&
+0$
+0!
+0'
+0X"
+b0 W"
+b0 s"
+b0 P$
+b0 =%
+0U"
+0["
+0Y"
+0a"
+b0 k"
+b0 \"
+b0 p"
+b0 M$
+b0 ;%
+b0 .
+b0 :
+b0 p
+b0 r"
+b0 V"
+b0 v"
+b0 >%
+0^"
+b0 `"
+b0 n"
+b0 N$
+b0 :%
+0t
+0v
+0q
+0x
+0u
+b0 r
+b0 C%
+b0 I%
+b0 y
+b0 c$
+b0 @%
+b0 T%
+0z
+b0 s
+b0 a$
+b0 B%
+b0 U%
+b0 w
+b0 A%
+b0 F%
+b0 {
+b0 b$
+b0 ?%
+b0 R%
+1G
+0/
+0F
+0=
+13
+1>
+b101110 ^%
+15
+#20
+08
+05
+#30
+b101110 \%
+1=
+03
+0>
+0G
+1/
+1F
+b11100011101000000000000000000001 1
+b11100011101000000000000000000001 H
+b11100011101000000000000000000001 H$
+b11100011101000000000000000000001 E
+b101110 ]%
+15
+#40
+05
+#50
+b100000000000000000000000000000001 >#
+b100000000000000000000000000000000 @#
+b1 k#
+b1 j#
+b100 ?#
+b100 w#
+b100000000000000000000000000000001 <#
+b100000000000000000000000000000001 x#
+b100000000000000000000000000000000 =#
+b100000000000000000000000000000000 v#
+b1 }#
+b1101 P#
+b1101 q#
+b1110 N#
+b1110 s#
+1[#
+b11100011101000000000000000000001 \#
+b11100011101000000000000000000001 m#
+b11100011101000000000000000000001 p#
+b101110 \%
+b100 (
+b100 C
+b100 n
+b100 I$
+b100 W%
+b0 d
+b0 s$
+b0 N%
+b0 4%
+b11 5%
+b1 .$
+1*$
+b1 '$
+1"$
+1#$
+1($
+b1 +$
+b1110 -$
+1S#
+b11100011101000000000000000000001 T#
+b11100011101000000000000000000001 l#
+b11100011101000000000000000000001 0$
+b10000 )%
+b10000 |%
+b0 F"
+b0 c#
+b0 U$
+b11100011101000000000000000000001 ;"
+b11100011101000000000000000000001 X#
+b11100011101000000000000000000001 ,$
+b11100011101000000000000000000001 J$
+19"
+b1000 %"
+b1000 o$
+b1000 g%
+b10000 +"
+b10000 l$
+b10000 e%
+b101110 ]%
+15
+#60
+05
+#70
+b101110 \%
+b1000 (
+b1000 C
+b1000 n
+b1000 I$
+b1000 W%
+b0 |%
+b0 6%
+b100000000000000000000000000000000 &%
+b0 )%
+b10000 %%
+b1 f
+b1 q$
+b1 L%
+b1 z$
+b0 +%
+b0 *%
+b0 4%
+b11 5%
+b11100000100000010001000000000000 1
+b11100000100000010001000000000000 H
+b11100000100000010001000000000000 H$
+b11100000100000010001000000000000 E
+b1000 Q
+b1000 c"
+b1000 w%
+b10000 W
+b10000 e"
+b10000 [$
+b10000 u%
+b0 +"
+b0 l$
+b0 e%
+b100 L$
+b100000000000000000000000000000000 @"
+b100000000000000000000000000000000 e#
+b100000000000000000000000000000000 X$
+b100 ?"
+b100 f#
+b100 Y$
+b100000000000000000000000000000001 >"
+b100000000000000000000000000000001 g#
+b100000000000000000000000000000001 Z$
+b1101 Q"
+b1101 _#
+b1101 Q$
+b1110 O"
+b1110 a#
+b1110 S$
+b101110 ]%
+15
+#80
+05
+#90
+b1 O#
+b1 M#
+b1 k#
+b1 j#
+b0 >#
+b0 ~#
+b1 ^#
+b1 r#
+b1 Z#
+b1 t#
+b100000000000000000000000000000000 =#
+b100000000000000000000000000000000 v#
+b0 ?#
+b0 w#
+b0 <#
+b0 x#
+b100 P#
+b100 q#
+b1110 N#
+b1110 s#
+b11100000100000010001000000000000 \#
+b11100000100000010001000000000000 m#
+b11100000100000010001000000000000 p#
+b1 {%
+b101110 \%
+b1100 (
+b1100 C
+b1100 n
+b1100 I$
+b1100 W%
+b0 .$
+0*$
+b1000000000000 '$
+0"$
+0($
+b0 +$
+b1 %$
+b1 /$
+b11100000100000010001000000000000 T#
+b11100000100000010001000000000000 l#
+b11100000100000010001000000000000 0$
+b1 z%
+b1 ~%
+b100000000000000000000000000000001 |%
+b1 "&
+b1 m%
+b1 &&
+19%
+b0 6%
+b1110 7%
+b100000000000000000000000000000000 &%
+b1110 '%
+b0 %%
+b10000 #%
+b1100 :"
+b1100 W#
+b1100 K$
+b1000 L$
+b11100000100000010001000000000000 ;"
+b11100000100000010001000000000000 X#
+b11100000100000010001000000000000 ,$
+b11100000100000010001000000000000 J$
+b1 ~
+b1 y$
+b1 l%
+b1 %&
+b100000000000000000000000000000000 $"
+b100000000000000000000000000000000 t$
+b100000000000000000000000000000000 h%
+b100000000000000000000000000000001 !"
+b100000000000000000000000000000001 x$
+b100000000000000000000000000000001 k%
+b100 ""
+b100 w$
+b100 j%
+b100 $&
+b1101 7"
+b1101 f$
+b1101 _%
+b1110 4"
+b1110 j$
+b1110 c%
+b0 W
+b0 e"
+b0 [$
+b0 u%
+b10000 W"
+b10000 s"
+b10000 P$
+b10000 =%
+b1000 V"
+b1000 v"
+b1000 >%
+b11100011101000001111000000000000 1
+b11100011101000001111000000000000 H
+b11100011101000001111000000000000 H$
+b11100011101000001111000000000000 E
+b101110 ]%
+15
+#100
+05
+#110
+b100000000000000000000000000000000 >#
+b0 O#
+b1111 M#
+b0 k#
+b0 j#
+b1 n$
+b1 +%
+b1 *%
+b1 0%
+b1 p%
+b0 |%
+b0 "&
+b1 !&
+b100 ?#
+b100 w#
+b100000000000000000000000000000000 <#
+b100000000000000000000000000000000 x#
+b0 }#
+b100000000000000000000000000000000 =#
+b100000000000000000000000000000000 v#
+b1101 P#
+b1101 q#
+b0 ^#
+b0 r#
+b1111 Z#
+b1111 t#
+b1110 N#
+b1110 s#
+b1 _"
+b1 o"
+b1 O$
+b1 b%
+b1 m"
+b1 8#
+b1 0#
+b1 5#
+b1 2#
+b1 1#
+1!%
+1-%
+b11100011101000001111000000000000 \#
+b11100011101000001111000000000000 m#
+b11100011101000001111000000000000 p#
+b10000 (
+b10000 C
+b10000 n
+b10000 I$
+b10000 W%
+b101110 \%
+b1 x"
+b1 w"
+b1101 /#
+b1101 7#
+1]"
+1|"
+1~"
+b1110 z"
+1*$
+b1111000000000000 '$
+1"$
+1($
+b1 +$
+b1111 %$
+b0 /$
+b11100011101000001111000000000000 T#
+b11100011101000001111000000000000 l#
+b11100011101000001111000000000000 0$
+1{$
+09%
+b1 6%
+b100000000000000000000000000000000 &%
+b0 #%
+b0 f
+b0 q$
+b0 L%
+b1 g
+b1 p$
+b1 K%
+b1 z$
+b0 4%
+b11 5%
+b11101010111111111111111111111011 1
+b11101010111111111111111111111011 H
+b11101010111111111111111111111011 H$
+b11101010111111111111111111111011 E
+b1000 r
+b1000 C%
+b1000 I%
+b10000 s
+b10000 a$
+b10000 B%
+b10000 U%
+b0 W"
+b0 s"
+b0 P$
+b0 =%
+b1 M
+b1 b"
+b1 y%
+b1 a
+b1 i"
+b1 r%
+b100 N
+b100 x%
+b1101 b
+b1101 j"
+b1101 q%
+b1110 `
+b1110 h"
+b1110 s%
+b10000 :"
+b10000 W#
+b10000 K$
+b1100 L$
+b11100011101000001111000000000000 ;"
+b11100011101000001111000000000000 X#
+b11100011101000001111000000000000 ,$
+b11100011101000001111000000000000 J$
+b1100 A"
+b1100 d#
+b1100 W$
+b0 ?"
+b0 f#
+b0 Y$
+b0 >"
+b0 g#
+b0 Z$
+b100 Q"
+b100 _#
+b100 Q$
+b1 P"
+b1 `#
+b1 R$
+b1 N"
+b1 b#
+b1 T$
+b101110 ]%
+15
+#120
+05
+#130
+b1111 O#
+b100000000000000000000000000000010 @#
+b111111111111111111111111111111011 >#
+b10 k#
+b10 j#
+b1111 ^#
+b1111 r#
+b100000000000000000000000000000010 =#
+b100000000000000000000000000000010 v#
+b0 ?#
+b0 w#
+b111111111111111111111111111111011 <#
+b111111111111111111111111111111011 x#
+b100 P#
+b100 q#
+b1111 Z#
+b1111 t#
+b1110 N#
+b1110 s#
+b11101010111111111111111111111011 \#
+b11101010111111111111111111111011 m#
+b11101010111111111111111111111011 p#
+b10100 (
+b10100 C
+b10100 n
+b10100 I$
+b10100 W%
+b0 g
+b0 p$
+b0 K%
+b111111111011 .$
+0*$
+b1111111111111011 '$
+0$$
+1)$
+1&$
+0($
+b101 +$
+b1111 /$
+b11101010111111111111111111111011 T#
+b11101010111111111111111111111011 l#
+b11101010111111111111111111111011 0$
+b1 "&
+b0 {%
+b1 ~%
+b0 |%
+0{$
+b0 6%
+b1 8%
+b100000000000000000000000000000000 &%
+1~$
+b0 z$
+b1 +%
+b1 *%
+b0 4%
+b1 i$
+b11 5%
+b1 /%
+1,%
+b101110 \%
+b10000 A"
+b10000 d#
+b10000 W$
+b100 ?"
+b100 f#
+b100 Y$
+b100000000000000000000000000000000 >"
+b100000000000000000000000000000000 g#
+b100000000000000000000000000000000 Z$
+b1101 Q"
+b1101 _#
+b1101 Q$
+b0 P"
+b0 `#
+b0 R$
+b1111 N"
+b1111 b#
+b1111 T$
+b10100 :"
+b10100 W#
+b10100 K$
+b10000 L$
+b11101010111111111111111111111011 ;"
+b11101010111111111111111111111011 X#
+b11101010111111111111111111111011 ,$
+b11101010111111111111111111111011 J$
+b1 *"
+b1 m$
+b1 f%
+b0 !"
+b0 x$
+b0 k%
+b1 6"
+b1 g$
+b1 `%
+1}
+b1100 %"
+b1100 o$
+b1100 g%
+b0 ""
+b0 w$
+b0 j%
+b0 $&
+b100 7"
+b100 f$
+b100 _%
+b1 3"
+b1 k$
+b1 d%
+b1 V
+b1 d"
+b1 v%
+b1 .
+b1 :
+b1 p
+b1 r"
+1^"
+b1 `"
+b1 n"
+b1 N$
+b1 :%
+b0 s
+b0 a$
+b0 B%
+b0 U%
+b0 1
+b0 H
+b0 H$
+b0 E
+b101110 ]%
+15
+#140
+05
+#150
+b0 O#
+b100000000000000000000000000000000 @#
+b0 >#
+b0 M#
+b0 k#
+b0 j#
+b100000000000000000000000000000000 =#
+b100000000000000000000000000000000 v#
+b0 <#
+b0 x#
+b0 P#
+b0 q#
+b0 ^#
+b0 r#
+b0 Z#
+b0 t#
+b0 N#
+b0 s#
+1J
+b1 0%
+b1 !&
+b0 \#
+b0 m#
+b0 p#
+1e$
+bx j
+bx _$
+bx Y%
+b11000 k
+b11000 `$
+b11000 X%
+b11000 (
+b11000 C
+b11000 n
+b11000 I$
+b11000 W%
+b101110 \%
+b0 x"
+b1 _"
+b1 o"
+b1 O$
+b1 b%
+b1 m"
+b1 8#
+b1 &#
+b0 +#
+0*#
+b1 ,#
+b0 (#
+b1 '#
+b0 ##
+b100 %#
+0)#
+0$#
+b100 7#
+b0 z%
+b1 ~%
+b0 |%
+b1 "&
+b1 }%
+b0 m%
+b0 &&
+b0 .$
+b0 '$
+1$$
+0)$
+0"$
+0&$
+0#$
+b0 +$
+b0 -$
+b0 %$
+b0 /$
+b0 T#
+b0 l#
+b0 0$
+1|$
+19%
+b1111 6%
+b1111 8%
+b100000000000000000000000000000010 &%
+b10 e
+b10 r$
+b10 M%
+b111011 f
+b111011 q$
+b111011 L%
+b1111 g
+b1111 p$
+b1111 K%
+b10 v$
+b11111111111111111111111111111011 z$
+b11000 i$
+b1 +%
+b1 *%
+b0 4%
+b11 5%
+b1 3%
+11%
+1z
+b1 {
+b1 b$
+b1 ?%
+b1 R%
+b1 "
+b1 9
+b1 m
+b1 t"
+b0 a
+b0 i"
+b0 r%
+b1100 Q
+b1100 c"
+b1100 w%
+b0 N
+b0 x%
+b100 b
+b100 j"
+b100 q%
+b1 _
+b1 f"
+b1 \$
+b1 t%
+b0 ~
+b0 y$
+b0 l%
+b0 %&
+b1 5"
+b1 h$
+b1 a%
+b100000000000000000000000000000000 !"
+b100000000000000000000000000000000 x$
+b100000000000000000000000000000000 k%
+b0 6"
+b0 g$
+b0 `%
+0}
+b10000 %"
+b10000 o$
+b10000 g%
+b100 ""
+b100 w$
+b100 j%
+b100 $&
+b1101 7"
+b1101 f$
+b1101 _%
+b1111 3"
+b1111 k$
+b1111 d%
+b11000 :"
+b11000 W#
+b11000 K$
+b10100 L$
+b0 ;"
+b0 X#
+b0 ,$
+b0 J$
+b10100 A"
+b10100 d#
+b10100 W$
+b100000000000000000000000000000010 @"
+b100000000000000000000000000000010 e#
+b100000000000000000000000000000010 X$
+b0 ?"
+b0 f#
+b0 Y$
+b111111111111111111111111111111011 >"
+b111111111111111111111111111111011 g#
+b111111111111111111111111111111011 Z$
+b100 Q"
+b100 _#
+b100 Q$
+b1111 P"
+b1111 `#
+b1111 R$
+b101110 ]%
+15
+#160
+05
+#170
+b0 i#
+0J
+b0 0%
+b0 !&
+0e$
+b0 _"
+b0 o"
+b0 O$
+b0 b%
+b0 m"
+b0 8#
+b0 0#
+b0 5#
+b0 1#
+b101110 \%
+b0 -
+b0 o
+b0 g"
+b0 Y#
+b0 V%
+0|$
+09%
+b1111 6%
+b0 8%
+b1111 7%
+b100000000000000000000000000000010 &%
+b1111 '%
+b0 w"
+b0 2#
+b1101 7#
+b0 l
+b0 u"
+b0 J%
+1T"
+b0 p%
+b0 ~%
+b0 "&
+b1111 }%
+b1 +%
+b1 *%
+b0 i$
+b0 4%
+b11 5%
+b1111 3%
+b1 .%
+b11100 :"
+b11100 W#
+b11100 K$
+b0 *"
+b0 m$
+b0 f%
+b0 5"
+b0 h$
+b0 a%
+b0 $"
+b0 t$
+b0 h%
+b0 !"
+b0 x$
+b0 k%
+b0 %"
+b0 o$
+b0 g%
+b0 ""
+b0 w$
+b0 j%
+b0 $&
+b0 7"
+b0 f$
+b0 _%
+b0 3"
+b0 k$
+b0 d%
+b1111 4"
+b1111 j$
+b1111 c%
+b0 M
+b0 b"
+b0 y%
+b10000 Q
+b10000 c"
+b10000 w%
+b100 N
+b100 x%
+b1101 b
+b1101 j"
+b1101 q%
+b1111 _
+b1111 f"
+b1111 \$
+b1111 t%
+b1 \"
+b1 p"
+b1 M$
+b1 ;%
+b1100 V"
+b1100 v"
+b1100 >%
+b101110 ]%
+15
+#180
+05
+#190
+b0 @#
+b0 =#
+b0 v#
+b1111 N#
+b1111 s#
+0[#
+b0 j
+b0 _$
+b0 Y%
+b0 k
+b0 `$
+b0 X%
+b0 (
+b0 C
+b0 n
+b0 I$
+b0 W%
+b0 6%
+b0 &%
+0!%
+b10000 d
+b10000 s$
+b10000 N%
+b0 e
+b0 r$
+b0 M%
+b0 f
+b0 q$
+b0 L%
+b0 g
+b0 p$
+b0 K%
+b101110 \%
+0T"
+b0 n$
+b10000 4%
+b0 v$
+bx z$
+b11000 i$
+b0 +%
+b0 *%
+b11 5%
+b0 3%
+0-%
+b0 /%
+b1111 .%
+b1 2%
+b0 }%
+b0 /#
+b0 7#
+0]"
+0|"
+0~"
+b1111 z"
+0S#
+b1000 A"
+b1000 d#
+b1000 W$
+b10000 F"
+b10000 c#
+b10000 U$
+b0 @"
+b0 e#
+b0 X$
+b0 >"
+b0 g#
+b0 Z$
+b0 Q"
+b0 _#
+b0 Q$
+b0 P"
+b0 `#
+b0 R$
+b0 N"
+b0 b#
+b0 T$
+b1111 O"
+b1111 a#
+b1111 S$
+b1100 r
+b1100 C%
+b1100 I%
+b1 y
+b1 c$
+b1 @%
+b1 T%
+b1111 \"
+b1111 p"
+b1111 M$
+b1111 ;%
+b0 .
+b0 :
+b0 p
+b0 r"
+b10000 V"
+b10000 v"
+b10000 >%
+b0 `"
+b0 n"
+b0 N$
+b0 :%
+b0 V
+b0 d"
+b0 v%
+b0 Q
+b0 c"
+b0 w%
+b0 N
+b0 x%
+b0 b
+b0 j"
+b0 q%
+b0 _
+b0 f"
+b0 \$
+b0 t%
+b1111 `
+b1111 h"
+b1111 s%
+09"
+b101110 ]%
+15
+#200
+05
+#210
+b100000000000000000000000000000000 @#
+b100000000000000000000000000000000 =#
+b100000000000000000000000000000000 v#
+b0 N#
+b0 s#
+1[#
+bx {%
+b100 (
+b100 C
+b100 n
+b100 I$
+b100 W%
+1S#
+bx "&
+bx m%
+bx &&
+b0 |%
+b10000 )%
+0~$
+b101110 \%
+b0 d
+b0 s$
+b0 N%
+b0 z$
+b0 i$
+b0 4%
+b11 5%
+b0 .%
+0,%
+b1111 2%
+b0 L$
+19"
+bx ~
+bx y$
+bx l%
+bx %&
+b11000 5"
+b11000 h$
+b11000 a%
+b1000 %"
+b1000 o$
+b1000 g%
+b10000 +"
+b10000 l$
+b10000 e%
+b0 "
+b0 9
+b0 m
+b0 t"
+b0 \"
+b0 p"
+b0 M$
+b0 ;%
+b0 V"
+b0 v"
+b0 >%
+0^"
+b10000 r
+b10000 C%
+b10000 I%
+b1111 y
+b1111 c$
+b1111 @%
+b1111 T%
+b0 {
+b0 b$
+b0 ?%
+b0 R%
+b11100011101000000000000000000001 1
+b11100011101000000000000000000001 H
+b11100011101000000000000000000001 H$
+b11100011101000000000000000000001 E
+b11100 A"
+b11100 d#
+b11100 W$
+b0 F"
+b0 c#
+b0 U$
+b101110 ]%
+15
+#220
+05
