@@ -4,3 +4,4 @@ mov r1, #1
 mov r2, #2
 ldr r1,[r2]
 mov r3, r1
+mul r5,r3,r1
