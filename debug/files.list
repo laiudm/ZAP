@@ -1,0 +1,16 @@
+# Assumes you are in debug directory.
+
++incdir+../includes/
+../rtl/zap_alu/zap_alu_main.v
+../rtl/zap_decode/zap_decode_bl_fsm.v
+../rtl/zap_decode/zap_decode_main.v
+../rtl/zap_decode/zap_decode_mem_fsm.v
+../rtl/zap_decode/zap_decode.v
+../rtl/zap_fetch/zap_fetch_main.v
+../rtl/zap_issue/zap_issue_main.v
+../rtl/zap_memory/zap_memory_main.v
+../rtl/zap_regf/zap_register_file.v
+../rtl/zap_shift/zap_multiply.v
+../rtl/zap_shift/zap_shifter_main.v
+../rtl/zap_shift/zap_shift_shifter.v
+../rtl/zap_top.v
