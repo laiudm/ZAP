@@ -18,3 +18,7 @@ mem[16] = 8'h93;
 mem[17] = 8'h1;
 mem[18] = 8'h5;
 mem[19] = 8'he0;
+mem[20] = 8'hf9;
+mem[21] = 8'hff;
+mem[22] = 8'hff;
+mem[23] = 8'heb;
