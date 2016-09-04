@@ -1,8 +1,13 @@
 .global _Reset
 _Reset:
-mov r1, #1
-mov r2, #2
-ldr r1,[r2]
-mov r3, r1
-mul r5,r3,r1
-bl _Reset
+mov r1, #33
+mov r2, #33
+mul r5,r2,r1
+mov r6, r5
+bl function
+mov r6, #2
+add r7,r6,#20
+
+function:
+mov r6, #1
+mov pc, lr
