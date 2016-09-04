@@ -1,5 +1,3 @@
-# Assumes you are in debug directory.
-
 +incdir+../includes/
 ../rtl/zap_alu/zap_alu_main.v
 ../rtl/zap_decode/zap_decode_bl_fsm.v
@@ -14,5 +12,3 @@
 ../rtl/zap_shift/zap_shifter_main.v
 ../rtl/zap_shift/zap_shift_shifter.v
 ../rtl/zap_top.v
-../testbench/cache.v
-../testbench/zap_test.v
