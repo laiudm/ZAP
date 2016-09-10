@@ -3,6 +3,7 @@
 ../rtl/zap_decode/zap_decode_bl_fsm.v
 ../rtl/zap_decode/zap_decode_main.v
 ../rtl/zap_decode/zap_decode_mem_fsm.v
+../rtl/zap_decode/zap_decode_thumb.v
 ../rtl/zap_decode/zap_decode.v
 ../rtl/zap_fetch/zap_fetch_main.v
 ../rtl/zap_issue/zap_issue_main.v
