@@ -74,7 +74,7 @@ prog:
 	.type	undef, %function
 undef:
 .LFB1:
-	.loc 1 15 0
+	.loc 1 14 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -85,9 +85,9 @@ undef:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 16 0
+	.loc 1 15 0
 	mov	r0, r0	@ nop
-	.loc 1 17 0
+	.loc 1 16 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -100,7 +100,7 @@ undef:
 	.type	swi, %function
 swi:
 .LFB2:
-	.loc 1 20 0
+	.loc 1 18 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -111,9 +111,9 @@ swi:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 21 0
+	.loc 1 19 0
 	mov	r0, r0	@ nop
-	.loc 1 22 0
+	.loc 1 20 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -126,7 +126,7 @@ swi:
 	.type	pabt, %function
 pabt:
 .LFB3:
-	.loc 1 25 0
+	.loc 1 22 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -137,9 +137,9 @@ pabt:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 26 0
+	.loc 1 23 0
 	mov	r0, r0	@ nop
-	.loc 1 27 0
+	.loc 1 24 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -152,6 +152,32 @@ pabt:
 	.type	dabt, %function
 dabt:
 .LFB4:
+	.loc 1 26 0
+	.cfi_startproc
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	.cfi_def_cfa_offset 4
+	.cfi_offset 11, -4
+	add	fp, sp, #0
+	.cfi_def_cfa_register 11
+	.loc 1 27 0
+	mov	r0, r0	@ nop
+	.loc 1 28 0
+	sub	sp, fp, #0
+	@ sp needed
+	ldr	fp, [sp], #4
+	bx	lr
+	.cfi_endproc
+.LFE4:
+	.size	dabt, .-dabt
+	.align	2
+	.global	irq
+	.type	irq, %function
+irq:
+.LFB5:
 	.loc 1 30 0
 	.cfi_startproc
 	@ Function supports interworking.
@@ -171,32 +197,6 @@ dabt:
 	ldr	fp, [sp], #4
 	bx	lr
 	.cfi_endproc
-.LFE4:
-	.size	dabt, .-dabt
-	.align	2
-	.global	irq
-	.type	irq, %function
-irq:
-.LFB5:
-	.loc 1 35 0
-	.cfi_startproc
-	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 1, uses_anonymous_args = 0
-	@ link register save eliminated.
-	str	fp, [sp, #-4]!
-	.cfi_def_cfa_offset 4
-	.cfi_offset 11, -4
-	add	fp, sp, #0
-	.cfi_def_cfa_register 11
-	.loc 1 36 0
-	mov	r0, r0	@ nop
-	.loc 1 37 0
-	sub	sp, fp, #0
-	@ sp needed
-	ldr	fp, [sp], #4
-	bx	lr
-	.cfi_endproc
 .LFE5:
 	.size	irq, .-irq
 	.align	2
@@ -204,7 +204,7 @@ irq:
 	.type	fiq, %function
 fiq:
 .LFB6:
-	.loc 1 40 0
+	.loc 1 34 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -215,9 +215,9 @@ fiq:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 41 0
+	.loc 1 35 0
 	mov	r0, r0	@ nop
-	.loc 1 42 0
+	.loc 1 36 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -292,7 +292,7 @@ fiq:
 	.uleb128 0x7
 	.ascii	"swi\000"
 	.byte	0x1
-	.byte	0x13
+	.byte	0x12
 	.4byte	.LFB2
 	.4byte	.LFE2-.LFB2
 	.uleb128 0x1
@@ -300,7 +300,7 @@ fiq:
 	.uleb128 0x6
 	.4byte	.LASF1
 	.byte	0x1
-	.byte	0x18
+	.byte	0x16
 	.4byte	.LFB3
 	.4byte	.LFE3-.LFB3
 	.uleb128 0x1
@@ -308,7 +308,7 @@ fiq:
 	.uleb128 0x6
 	.4byte	.LASF2
 	.byte	0x1
-	.byte	0x1d
+	.byte	0x1a
 	.4byte	.LFB4
 	.4byte	.LFE4-.LFB4
 	.uleb128 0x1
@@ -316,7 +316,7 @@ fiq:
 	.uleb128 0x7
 	.ascii	"irq\000"
 	.byte	0x1
-	.byte	0x22
+	.byte	0x1e
 	.4byte	.LFB5
 	.4byte	.LFE5-.LFB5
 	.uleb128 0x1
@@ -324,7 +324,7 @@ fiq:
 	.uleb128 0x7
 	.ascii	"fiq\000"
 	.byte	0x1
-	.byte	0x27
+	.byte	0x22
 	.4byte	.LFB6
 	.4byte	.LFE6-.LFB6
 	.uleb128 0x1
