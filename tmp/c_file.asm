@@ -38,7 +38,7 @@ prog:
 	mov	r3, #23
 	str	r3, [fp, #-12]
 	.loc 1 6 0
-	mov	r3, #300
+	mov	r3, #500
 	str	r3, [fp, #-16]
 	.loc 1 8 0
 	mov	r3, #0
