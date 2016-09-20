@@ -1,6 +1,7 @@
 +incdir+../includes/
 ../rtl/zap_alu/zap_alu_main.v
 ../rtl/zap_decode/zap_decode_bl_fsm.v
+../rtl/zap_decode/zap_decode_coproc.v
 ../rtl/zap_decode/zap_decode_main.v
 ../rtl/zap_decode/zap_decode_mem_fsm.v
 ../rtl/zap_decode/zap_decode_thumb.v
