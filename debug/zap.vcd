@@ -1,5 +1,5 @@
 $date
-	Tue Sep 20 21:42:21 2016
+	Tue Sep 20 22:01:45 2016
 $end
 $version
 	Icarus Verilog
@@ -1190,12 +1190,12 @@ $var wire 32 3( o_rd [31:0] $end
 $var reg 1 !" o_busy $end
 $var reg 32 4( out_ff [31:0] $end
 $var reg 32 5( out_nxt [31:0] $end
-$var reg 16 6( prodhilo_ff [15:0] $end
-$var reg 16 7( prodhilo_nxt [15:0] $end
-$var reg 16 8( prodlohi_ff [15:0] $end
-$var reg 16 9( prodlohi_nxt [15:0] $end
-$var reg 16 :( prodlolo_ff [15:0] $end
-$var reg 16 ;( prodlolo_nxt [15:0] $end
+$var reg 32 6( prodhilo_ff [31:0] $end
+$var reg 32 7( prodhilo_nxt [31:0] $end
+$var reg 32 8( prodlohi_ff [31:0] $end
+$var reg 32 9( prodlohi_nxt [31:0] $end
+$var reg 32 :( prodlolo_ff [31:0] $end
+$var reg 32 ;( prodlolo_nxt [31:0] $end
 $var reg 3 <( state_ff [2:0] $end
 $var reg 3 =( state_nxt [2:0] $end
 $upscope $end
