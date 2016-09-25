@@ -35,10 +35,10 @@ prog:
 	mov	r3, #0
 	str	r3, [fp, #-8]
 	.loc 1 4 0
-	mov	r3, #23
+	mov	r3, #32
 	str	r3, [fp, #-12]
 	.loc 1 6 0
-	mov	r3, #500
+	mov	r3, #536
 	str	r3, [fp, #-16]
 	.loc 1 8 0
 	mov	r3, #0
@@ -51,18 +51,18 @@ prog:
 	ldr	r2, [fp, #-16]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-12]
-	add	r1, r3, #1
+	sub	r1, r3, #1
 	str	r1, [fp, #-12]
 	str	r3, [r2]
 	.loc 1 8 0 discriminator 2
 	ldr	r3, [fp, #-8]
-	add	r3, r3, #1
+	sub	r3, r3, #1
 	str	r3, [fp, #-8]
 .L2:
 	.loc 1 8 0 is_stmt 0 discriminator 1
 	ldr	r3, [fp, #-8]
-	cmp	r3, #9
-	ble	.L3
+	cmn	r3, #9
+	bge	.L3
 .L4:
 	.loc 1 11 0 is_stmt 1 discriminator 1
 	b	.L4
