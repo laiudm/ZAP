@@ -17,4 +17,7 @@
 ../rtl/zap_shift/zap_multiply.v
 ../rtl/zap_shift/zap_shifter_main.v
 ../rtl/zap_shift/zap_shift_shifter.v
+../rtl/zap_regf/ram.v
+../rtl/zap_regf/bram.v
+../rtl/zap_regf/bram_wrapper.v
 ../rtl/zap_top.v
