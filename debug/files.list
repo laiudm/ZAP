@@ -21,3 +21,4 @@
 ../rtl/zap_regf/bram.v
 ../rtl/zap_regf/bram_wrapper.v
 ../rtl/zap_top.v
+../rtl/zap_reset_synchronizer/zap_reset_synchronizer_main.v
