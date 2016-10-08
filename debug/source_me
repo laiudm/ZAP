@@ -3,7 +3,7 @@
 
 set rand = `perl rand.pl`
 echo "Random number is $rand"
-rm -f a.out log.log zap.vcd prog.v log.log.gz
+rm -f a.out log.log zap.vcd prog.v log.log.gz zap.vcd.gz
 date | tee log.log
 ls -l | tee -a log.log
 perl ../scripts/do_it.pl ../sw/asm/prog.s ../sw/c/prog.c ../scripts/linker.ld ../tmp/prog.bin prog.v
@@ -11,6 +11,7 @@ iverilog -f files.list ../testbench/*.v -g2001 -DSEED=$rand -DSIM -DIRQ_EN -DFPG
 ./a.out >> log.log
 tail -n 20 log.log
 gzip log.log
-gtkwave zap.vcd &
+gtkwave zap.vcd
+gzip zap.vcd
 echo "Please view log.log for simulation logs..."
 

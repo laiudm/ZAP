@@ -48,9 +48,11 @@ factorial:
 	bl	fact
 	mov	r3, r0
 	str	r3, [r4]
-.L2:
-	.loc 1 6 0 discriminator 1
-	b	.L2
+	.loc 1 6 0
+	sub	sp, fp, #8
+	@ sp needed
+	ldmfd	sp!, {r4, fp, lr}
+	bx	lr
 	.cfi_endproc
 .LFE0:
 	.size	factorial, .-factorial
@@ -59,7 +61,7 @@ factorial:
 	.type	fact, %function
 fact:
 .LFB1:
-	.loc 1 10 0
+	.loc 1 9 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 8
@@ -72,15 +74,15 @@ fact:
 	.cfi_def_cfa 11, 4
 	sub	sp, sp, #8
 	str	r0, [fp, #-8]
-	.loc 1 11 0
+	.loc 1 10 0
 	ldr	r3, [fp, #-8]
 	cmp	r3, #0
-	bne	.L4
-	.loc 1 12 0
+	bne	.L3
+	.loc 1 11 0
 	mov	r3, #1
-	b	.L5
-.L4:
-	.loc 1 14 0
+	b	.L4
+.L3:
+	.loc 1 13 0
 	ldr	r3, [fp, #-8]
 	sub	r3, r3, #1
 	mov	r0, r3
@@ -88,8 +90,8 @@ fact:
 	mov	r3, r0
 	ldr	r2, [fp, #-8]
 	mul	r3, r2, r3
-.L5:
-	.loc 1 15 0
+.L4:
+	.loc 1 14 0
 	mov	r0, r3
 	sub	sp, fp, #4
 	@ sp needed
@@ -103,7 +105,7 @@ fact:
 	.type	__undef, %function
 __undef:
 .LFB2:
-	.loc 1 17 0
+	.loc 1 16 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -114,9 +116,9 @@ __undef:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 18 0
+	.loc 1 17 0
 	mov	r0, r0	@ nop
-	.loc 1 19 0
+	.loc 1 18 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -129,7 +131,7 @@ __undef:
 	.type	__swi, %function
 __swi:
 .LFB3:
-	.loc 1 21 0
+	.loc 1 20 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -140,9 +142,9 @@ __swi:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 22 0
+	.loc 1 21 0
 	mov	r0, r0	@ nop
-	.loc 1 23 0
+	.loc 1 22 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -155,7 +157,7 @@ __swi:
 	.type	__pabt, %function
 __pabt:
 .LFB4:
-	.loc 1 25 0
+	.loc 1 24 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -166,9 +168,9 @@ __pabt:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 26 0
+	.loc 1 25 0
 	mov	r0, r0	@ nop
-	.loc 1 27 0
+	.loc 1 26 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -181,7 +183,7 @@ __pabt:
 	.type	__dabt, %function
 __dabt:
 .LFB5:
-	.loc 1 29 0
+	.loc 1 28 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -192,9 +194,9 @@ __dabt:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 30 0
+	.loc 1 29 0
 	mov	r0, r0	@ nop
-	.loc 1 31 0
+	.loc 1 30 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -207,7 +209,7 @@ __dabt:
 	.type	__irq, %function
 __irq:
 .LFB6:
-	.loc 1 33 0
+	.loc 1 32 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -218,9 +220,9 @@ __irq:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 34 0
+	.loc 1 33 0
 	mov	r0, r0	@ nop
-	.loc 1 35 0
+	.loc 1 34 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -233,7 +235,7 @@ __irq:
 	.type	__fiq, %function
 __fiq:
 .LFB7:
-	.loc 1 37 0
+	.loc 1 36 0
 	.cfi_startproc
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
@@ -244,9 +246,9 @@ __fiq:
 	.cfi_offset 11, -4
 	add	fp, sp, #0
 	.cfi_def_cfa_register 11
-	.loc 1 38 0
+	.loc 1 37 0
 	mov	r0, r0	@ nop
-	.loc 1 39 0
+	.loc 1 38 0
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -304,7 +306,7 @@ __fiq:
 	.uleb128 0x8
 	.4byte	.LASF10
 	.byte	0x1
-	.byte	0x9
+	.byte	0x8
 	.4byte	0x5a
 	.4byte	.LFB1
 	.4byte	.LFE1-.LFB1
@@ -314,7 +316,7 @@ __fiq:
 	.uleb128 0x9
 	.ascii	"x\000"
 	.byte	0x1
-	.byte	0x9
+	.byte	0x8
 	.4byte	0x5a
 	.uleb128 0x2
 	.byte	0x91
@@ -323,7 +325,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF0
 	.byte	0x1
-	.byte	0x11
+	.byte	0x10
 	.4byte	.LFB2
 	.4byte	.LFE2-.LFB2
 	.uleb128 0x1
@@ -331,7 +333,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF1
 	.byte	0x1
-	.byte	0x15
+	.byte	0x14
 	.4byte	.LFB3
 	.4byte	.LFE3-.LFB3
 	.uleb128 0x1
@@ -339,7 +341,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF2
 	.byte	0x1
-	.byte	0x19
+	.byte	0x18
 	.4byte	.LFB4
 	.4byte	.LFE4-.LFB4
 	.uleb128 0x1
@@ -347,7 +349,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF3
 	.byte	0x1
-	.byte	0x1d
+	.byte	0x1c
 	.4byte	.LFB5
 	.4byte	.LFE5-.LFB5
 	.uleb128 0x1
@@ -355,7 +357,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF4
 	.byte	0x1
-	.byte	0x21
+	.byte	0x20
 	.4byte	.LFB6
 	.4byte	.LFE6-.LFB6
 	.uleb128 0x1
@@ -363,7 +365,7 @@ __fiq:
 	.uleb128 0xa
 	.4byte	.LASF5
 	.byte	0x1
-	.byte	0x25
+	.byte	0x24
 	.4byte	.LFB7
 	.4byte	.LFE7-.LFB7
 	.uleb128 0x1
