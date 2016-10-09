@@ -1,6 +1,7 @@
 # The fastest way to get up and running with this.
 # Simply source this.
 
+perl check_ivl_version.pl
 set rand = `perl rand.pl`
 echo "Random number is $rand"
 rm -f a.out log.log zap.vcd prog.v log.log.gz zap.vcd.gz
