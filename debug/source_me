@@ -4,15 +4,17 @@
 perl check_ivl_version.pl
 set rand = `perl rand.pl`
 echo "Random number is $rand"
-rm -f a.out log.log zap.vcd prog.v log.log.gz zap.vcd.gz
+rm -f a.out log.log zap.vcd prog.v log.log.gz zap.vcd.gz waves.vcd.gz
 date | tee log.log
 ls -l | tee -a log.log
 perl ../scripts/do_it.pl ../sw/asm/prog.s ../sw/c/prog.c ../scripts/linker.ld ../tmp/prog.bin prog.v
-iverilog -f files.list ../testbench/*.v -g2001 -Winfloop -Wall -DSEED=$rand -DSIM -DIRQ_EN -DFPGA -DFPGA_CACHE
+iverilog -f files.list ../testbench/*.v -g2001 -Winfloop -Wall -DSEED=$rand -DSIM -DFPGA -DFPGA_CACHE -DIRQ_EN
 ./a.out >> log.log
 tail -n 20 log.log
 gzip log.log
+cp zap.vcd waves.vcd
+gzip waves.vcd
 gtkwave zap.vcd
-gzip zap.vcd
+rm -f zap.vcd
 echo "Please view log.log for simulation logs..."
 
