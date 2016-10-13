@@ -4,7 +4,7 @@
 ../rtl/zap_alu/zap_alu_main.v
 ../rtl/zap_predecode/zap_predecode_bl_fsm.v
 ../rtl/zap_predecode/zap_predecode_coproc.v
-../rtl/zap_branch_predict/zap_branch_predict.v
+../rtl/zap_branch_predict/zap_branch_predict_main.v
 ../rtl/zap_predecode/zap_predecode_mult_fsm.v
 ../rtl/zap_predecode/zap_predecode_main.v
 ../rtl/zap_predecode/zap_predecode_mem_fsm.v
