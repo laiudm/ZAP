@@ -33,21 +33,22 @@ factorial:
 	.cfi_def_cfa 11, 4
 	sub	sp, sp, #12
 	.loc 1 3 0
-	mov	r3, #500
+	mov	r3, #600
 	str	r3, [fp, #-16]
 	.loc 1 4 0
 	ldr	r3, [fp, #-16]
 	mov	r2, #5
-	str	r2, [r3]
+	strb	r2, [r3]
 	.loc 1 5 0
 	ldr	r3, [fp, #-16]
-	add	r4, r3, #4
+	add	r4, r3, #1
 	ldr	r3, [fp, #-16]
-	ldr	r3, [r3]
+	ldrb	r3, [r3]	@ zero_extendqisi2
 	mov	r0, r3
 	bl	fact
 	mov	r3, r0
-	str	r3, [r4]
+	and	r3, r3, #255
+	strb	r3, [r4]
 	.loc 1 6 0
 	sub	sp, fp, #8
 	@ sp needed
@@ -259,20 +260,20 @@ __fiq:
 .Letext0:
 	.section	.debug_info,"",%progbits
 .Ldebug_info0:
-	.4byte	0xea
+	.4byte	0xf1
 	.2byte	0x4
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
 	.uleb128 0x1
-	.4byte	.LASF6
-	.byte	0x1
 	.4byte	.LASF7
+	.byte	0x1
 	.4byte	.LASF8
+	.4byte	.LASF9
 	.4byte	.Ltext0
 	.4byte	.Letext0-.Ltext0
 	.4byte	.Ldebug_line0
 	.uleb128 0x2
-	.4byte	.LASF9
+	.4byte	.LASF10
 	.byte	0x1
 	.byte	0x1
 	.4byte	.LFB0
@@ -289,10 +290,10 @@ __fiq:
 	.byte	0x91
 	.sleb128 -20
 	.uleb128 0x4
-	.4byte	.LASF10
+	.4byte	.LASF11
 	.byte	0x1
 	.byte	0x5
-	.4byte	0x5a
+	.4byte	0x61
 	.uleb128 0x5
 	.byte	0
 	.byte	0
@@ -300,70 +301,74 @@ __fiq:
 	.byte	0x4
 	.4byte	0x5a
 	.uleb128 0x7
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF0
+	.uleb128 0x8
 	.byte	0x4
 	.byte	0x5
 	.ascii	"int\000"
-	.uleb128 0x8
-	.4byte	.LASF10
+	.uleb128 0x9
+	.4byte	.LASF11
 	.byte	0x1
 	.byte	0x8
-	.4byte	0x5a
+	.4byte	0x61
 	.4byte	.LFB1
 	.4byte	.LFE1-.LFB1
 	.uleb128 0x1
 	.byte	0x9c
-	.4byte	0x87
-	.uleb128 0x9
+	.4byte	0x8e
+	.uleb128 0xa
 	.ascii	"x\000"
 	.byte	0x1
 	.byte	0x8
-	.4byte	0x5a
+	.4byte	0x61
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -12
 	.byte	0
-	.uleb128 0xa
-	.4byte	.LASF0
+	.uleb128 0xb
+	.4byte	.LASF1
 	.byte	0x1
 	.byte	0x10
 	.4byte	.LFB2
 	.4byte	.LFE2-.LFB2
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0xa
-	.4byte	.LASF1
+	.uleb128 0xb
+	.4byte	.LASF2
 	.byte	0x1
 	.byte	0x14
 	.4byte	.LFB3
 	.4byte	.LFE3-.LFB3
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0xa
-	.4byte	.LASF2
+	.uleb128 0xb
+	.4byte	.LASF3
 	.byte	0x1
 	.byte	0x18
 	.4byte	.LFB4
 	.4byte	.LFE4-.LFB4
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0xa
-	.4byte	.LASF3
+	.uleb128 0xb
+	.4byte	.LASF4
 	.byte	0x1
 	.byte	0x1c
 	.4byte	.LFB5
 	.4byte	.LFE5-.LFB5
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0xa
-	.4byte	.LASF4
+	.uleb128 0xb
+	.4byte	.LASF5
 	.byte	0x1
 	.byte	0x20
 	.4byte	.LFB6
 	.4byte	.LFE6-.LFB6
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0xa
-	.4byte	.LASF5
+	.uleb128 0xb
+	.4byte	.LASF6
 	.byte	0x1
 	.byte	0x24
 	.4byte	.LFB7
@@ -471,10 +476,21 @@ __fiq:
 	.uleb128 0x3e
 	.uleb128 0xb
 	.uleb128 0x3
-	.uleb128 0x8
+	.uleb128 0xe
 	.byte	0
 	.byte	0
 	.uleb128 0x8
+	.uleb128 0x24
+	.byte	0
+	.uleb128 0xb
+	.uleb128 0xb
+	.uleb128 0x3e
+	.uleb128 0xb
+	.uleb128 0x3
+	.uleb128 0x8
+	.byte	0
+	.byte	0
+	.uleb128 0x9
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -501,7 +517,7 @@ __fiq:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x9
+	.uleb128 0xa
 	.uleb128 0x5
 	.byte	0
 	.uleb128 0x3
@@ -516,7 +532,7 @@ __fiq:
 	.uleb128 0x18
 	.byte	0
 	.byte	0
-	.uleb128 0xa
+	.uleb128 0xb
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3f
@@ -555,26 +571,28 @@ __fiq:
 	.section	.debug_line,"",%progbits
 .Ldebug_line0:
 	.section	.debug_str,"MS",%progbits,1
-.LASF5:
-	.ascii	"__fiq\000"
-.LASF4:
-	.ascii	"__irq\000"
-.LASF8:
-	.ascii	"/proj/ZAP/debug\000"
-.LASF2:
-	.ascii	"__pabt\000"
-.LASF9:
-	.ascii	"factorial\000"
-.LASF0:
-	.ascii	"__undef\000"
-.LASF7:
-	.ascii	"../sw/c/prog.c\000"
-.LASF3:
-	.ascii	"__dabt\000"
 .LASF6:
-	.ascii	"GNU C 4.8.4 20141219 (release) -mcpu=arm7tdmi -g\000"
+	.ascii	"__fiq\000"
+.LASF5:
+	.ascii	"__irq\000"
+.LASF9:
+	.ascii	"/proj/ZAP/debug\000"
+.LASF3:
+	.ascii	"__pabt\000"
 .LASF10:
-	.ascii	"fact\000"
+	.ascii	"factorial\000"
 .LASF1:
+	.ascii	"__undef\000"
+.LASF8:
+	.ascii	"../sw/c/prog.c\000"
+.LASF4:
+	.ascii	"__dabt\000"
+.LASF7:
+	.ascii	"GNU C 4.8.4 20141219 (release) -mcpu=arm7tdmi -g\000"
+.LASF11:
+	.ascii	"fact\000"
+.LASF0:
+	.ascii	"char\000"
+.LASF2:
 	.ascii	"__swi\000"
 	.ident	"GCC: (4.8.4-1+11-1) 4.8.4 20141219 (release)"
