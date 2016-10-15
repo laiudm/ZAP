@@ -6,16 +6,19 @@
 set LOG_FILE_PATH   = "/tmp/zap.log"
 set VVP_PATH        = "/tmp/zap.vvp"
 set VCD_PATH        = "/tmp/zap.vcd"
-set PROG_PATH       = "prog.v"
+set MEMORY_IMAGE    = `perl get_memory_image.pl ../includes/config.vh`
+set PROG_PATH       = "/tmp/prog.v"
 set ASM_PATH        = "../sw/asm/prog.s"
 set C_PATH          = "../sw/c/prog.c"
 set LINKER_PATH     = "../scripts/linker.ld"
 set TARGET_BIN_PATH = "/tmp/prog.bin"
 
+echo "PROG_PATH = $PROG_PATH\n";
+
 perl check_ivl_version.pl
 set rand = `perl rand.pl`
 echo "Random number is $rand"
-rm -f $LOG_FILE_PATH $VVP_PATH $VCD_PATH $PROG_PATH $TARGET_BIN_PATH
+rm -f $LOG_FILE_PATH $VVP_PATH $VCD_PATH $PROG_PATH $TARGET_BIN_PATH $PROG_PATH
 date | tee $LOG_FILE_PATH
 ls -l | tee -a $LOG_FILE_PATH
 perl ../scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_PATH
@@ -23,5 +26,6 @@ iverilog -f files.list -o $VVP_PATH ../testbench/*.v -g2001 -Winfloop -Wall -DSE
 vvp /tmp/zap.vvp >> $LOG_FILE_PATH
 tcsh custom_command.tcsh
 gtkwave $VCD_PATH
-rm $LOG_FILE_PATH $VVP_PATH $VCD_PATH $TARGET_BIN_PATH
+
+# Delete /tmp files after use.
 
