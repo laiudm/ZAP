@@ -21,7 +21,7 @@ ls -l | tee -a $LOG_FILE_PATH
 perl ../scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_PATH
 iverilog -f files.list -o $VVP_PATH ../testbench/*.v -g2001 -Winfloop -Wall -DSEED=$rand
 vvp /tmp/zap.vvp >> $LOG_FILE_PATH
-tail -n 20 $LOG_FILE_PATH
+tcsh custom_command.tcsh
 gtkwave $VCD_PATH
 rm $LOG_FILE_PATH $VVP_PATH $VCD_PATH $TARGET_BIN_PATH
 
