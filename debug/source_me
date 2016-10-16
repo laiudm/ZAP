@@ -25,7 +25,7 @@ perl ../scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_P
 iverilog -f files.list -o $VVP_PATH ../testbench/*.v -g2001 -Winfloop -Wall -DSEED=$rand
 vvp /tmp/zap.vvp >> $LOG_FILE_PATH
 tcsh custom_command.tcsh
-gtkwave $VCD_PATH
+gtkwave $VCD_PATH &
 
 # Delete /tmp files after use.
 
