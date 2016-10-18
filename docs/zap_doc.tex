@@ -1,0 +1,238 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{parskip}
+\usepackage{mathptmx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{textcomp}
+\pagestyle{headings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{ ZAP : An ARM v4T Compatible Soft Processor }
+\author{Revanth Kamaraj}
+
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\maketitle
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+ZAP is an ARM{\textregistered} v4T compatible soft processor core. The code is
+fully open source and is released under the MIT license.
+
+\begin{center}
+\textbf{MIT License} \\
+\end{center}
+Copyright (c) 2016 Revanth Kamaraj (Email: revanth91kamaraj@gmail.com) \\\\
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions: \\\\
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software. \\\\
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+\subsection{Features}
+
+\begin{itemize}
+
+\item Fully ARM v4T compatible. Software compatible with the ARM7TM core. This
+includes support for the 16-bit compressed instruction set.
+
+\item The processor is super-pipelined with a 9 stage pipeline to achieve a high
+operating frequency. The pipeline has a data forwarding capability to allow 
+back to back instructions to execute without stalls. Non trivial shifts require
+their operands a cycle early. Loads have a 3 cycle latency and the pipeline
+will stall if an attempt is made to access the register within the latency
+period.
+\item Features dedicated high level sensitive IRQ, FIQ and memory abort pins.
+
+\item Can be interfaced with caches/MMU.
+
+\item The CPSR of the processor is exposed as a port allowing for 
+implementation of a virtual memory system.
+
+\item Features a coprocessor interface that allows the core to be extended. The
+coprocessor interface simply exposes internal signals of the core. It is up to 
+the coprocessor to interpret and process instructions correctly.
+
+\item Supports both short and long multiply and multiply-accumulate operations.
+
+\item The processor may be synthesized without compressed instruction support
+and/or coprocessor interface support.
+
+\item Most memory structures of the processor map efficiently onto FPGA block
+RAMs. The register file is overclocked by a factor of 2.
+
+\item Multiplication is performed using a 17x17 signed multiplier. This 
+multiplier maps to dedicated silicon DSP blocks found on FPGAs.
+
+\item No device specific instantiations are made to allow for portability
+across FPGA vendors.
+
+\item Having two write ports in the register file allows memory access with
+writeback to issue at once instead of being split into two operations. This
+may improve performance.
+
+\item The processor core is written entirely in synthesizable Verilog-2001.
+
+\item Features a dynamic branch predictor that is installed within the
+pipeline to compensate for its length. Branches within a 2KB block of memory 
+can be mapped into the predictor without conflict.
+
+\item Uses a base restored abort model making it easier to write exception
+handlers. Basically, on a fault in between a multiple memory transfer, the
+processor rolls back the base pointer register.
+
+\end{itemize}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{About This Manual}
+The purpose of this manual is to document the processor core's design. This
+document is very incomplete. I will try my best to update it.
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Configuring the core and testbench}
+Throughout, it is assumed that \texttt{\$ZAP\_HOME} points to the working
+directory of the project.\\
+Core/testbench configuration may be done using defines. The defines file is 
+located in \\
+\texttt{\$ZAP\_HOME/includes/config.vh}. \\
+
+\begin{tabularx}{\textwidth}{| X | X | X | X |} 
+\hline
+Define & Purpose & Required for & Comments \\  
+\hline
+\multicolumn{4}{c}{CORE CONFIGURATION} \\
+\hline
+\texttt{THUMB\_EN} & Enabling compressed instruction support & Core Setup & 
+Enabling this increases core area and reduces performance. \\ 
+\texttt{COPROC\_IF\_EN} & Enabling coprocessor suport. Extra ports get added. &
+ Core Setup & Enabling this increases core area and reduces performance. \\
+\hline
+\multicolumn{4}{c}{TESTBENCH CONFIGURATION} \\
+\hline
+\texttt{IRQ\_EN} & Generates periodic IRQ pulses. & Testbench & -- \\
+\texttt{SIM} & Generates extra messages. & Testbench & \emph{Must be UNDEFINED 
+for correct synthesis in Xilinx.} \\
+\texttt{VCD\_FILE\_PATH} & Set the path to the VCD data dump. & Testbench & -- \\
+\texttt{MEMORY\_IMAGE} & Path to the memory image Verilog file. & Testbench & 
+-- \\
+\texttt{MAX\_CLOCK\_CYCLES} & Set the number of cycles the simulation should 
+run before terminating. & Testbench & -- \\
+\texttt{SEED} & Set the testbench seed. The seed influences randomness. & 
+Testbench & -- \\
+\hline
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+\section{Compiling Code and Running Simulation}
+\subsubsection{Generating a binary using GNU tools}
+You can use the existing GNU toolchain to generate code for the processor. This
+section will briefly explain the procedure. For the purposes of this 
+discussion, let us assume these are the source files...\\
+\texttt{main.c} \\
+\texttt{fact.c} \\
+\texttt{startup.s} \\
+\texttt{misc.s} \\
+\texttt{linker.ld}  \emph{ This is the linker script.} \\\\
+Generate a bunch of object files.\\
+\texttt{arm-none-eabi-as -mcpu=arm7tdmi -g startup.s -o startup.o} \\
+\texttt{arm-none-eabi-as -mcpu=arm7tdmi -g misc.s -o misc.o} \\
+\texttt{arm-none-eabi-gcc -c -mcpu=arm7tdmi -g main.c -o main.o} \\
+\texttt{arm-none-eabi-gcc -c -mcpu=arm7tdmi -g fact.c -o fact.o} \\\\
+Link them up using a linker script...\\
+\texttt{arm-none-eabi-ld -T linker.ld startup.o misc.o main.o fact.o -o prog.elf} \\\\
+Finally generate a flat binary...\\
+\texttt{arm-none-eabi-objcopy -O binary prog.elf prog.bin} \\\\
+The .bin file generated is the flat binary.\\\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Generating a Verilog memory map}
+\texttt{perl \$ZAP\_HOME/scripts/bin2mem.pl prog.bin prog.v}\\
+The prog.v file looks like this...\\\\
+\texttt{mem[0] = 8'b00;} \\
+\texttt{mem[1] = 8'b01;} \\\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Invoking the simulator}
+Your command must look like this...\\\\
+\texttt{iverilog \$ZAP\_HOME/rtl/*.v \$ZAP\_HOME/*.v \$ZAP\_HOME/testbench/*.v
+\$ZAP\_HOME/models/ram/ram.v -DSEED=22}\\\\
+
+The rtl/*.v and rtl/*/*.v collect all of the synthesizable Verilog-2001 files,
+the testbench/*.v collects all of the testbench (In this situations, the ram.v
+file is a part of the testbench).
+
+Provide some seed value (22 is used in the example). Ensure you edit the 
+\texttt{config.vh} file before running the simulation to correctly point to the
+memory map, vcd target output path etc for the simulator to pick up.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Run Sample Code quickly...}
+A sample .s and .c file is present in \texttt{\$ZAP\_HOME/sw/s} and 
+\texttt{\$ZAP\_HOME/sw/c} respectively. To translate them to binary and to a 
+Verilog memory map, you can run the Perl script \\\\ 
+\texttt{perl \$ZAP\_HOME/debug/run\_sim.pl} \\\\ Ensure you set all the variables
+in the script as per the table below...\\\\
+
+% This table tells what to place in script variables.
+\begin{tabularx}{\textwidth}{| X | X |}
+\hline
+Variable & Purpose \\
+\hline
+\texttt{ZAP\_HOME} & Set this to the project working directory.\\\\
+\texttt{LOG\_FILE\_PATH} & Set this to the place where you want the log file to 
+be created.\\\\
+\texttt{ASM\_PATH} & Set this to the location of your startup assembly file.
+\\\\
+\texttt{C\_PATH} & Set this to the location of your C file. \\\\
+\texttt{LINKER\_PATH} & Set this to the location of the linker script. \\\\
+\texttt{TARGET\_BIN\_PATH} & Set this to the target bin file location. \\\\
+\texttt{VCD\_PATH} & Set this to location where the VCD is to be created. 
+\textbf{This must match what is in config.vh} \\\\
+\texttt{MEMORY\_IMAGE} & Set this to the location where the memory image must be
+created. \textbf{This must match what is in config.vh} \\\\
+\hline
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

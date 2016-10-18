@@ -4,19 +4,12 @@ use strict;
 use warnings;
 
 my $ZAP_HOME        = "/proj/ZAP";  # Modify this according to your system configuration.
-
 my $LOG_FILE_PATH   = "/tmp/zap.log";
 my $VVP_PATH        = "/tmp/zap.vvp";
-
-my $VCD_PATH        = get_vcd_path();
-my $MEMORY_IMAGE    = get_memory_image();
-
+my $VCD_PATH        = "/tmp/zap.vcd";
+my $MEMORY_IMAGE    = "/tmp/prog.v";
 my $FILELIST        = "/tmp/zap_files.list";
-
-chomp $VCD_PATH;
-chomp $MEMORY_IMAGE;
-
-my $PROG_PATH       = "/tmp/prog.v";
+my $PROG_PATH       = $MEMORY_IMAGE;
 my $ASM_PATH        = "$ZAP_HOME/sw/asm/prog.s";
 my $C_PATH          = "$ZAP_HOME/sw/c/prog.c";
 my $LINKER_PATH     = "$ZAP_HOME/scripts/linker.ld";
@@ -29,6 +22,7 @@ system("rm -fv $LOG_FILE_PATH $VVP_PATH $VCD_PATH $PROG_PATH $TARGET_BIN_PATH $P
 system("date | tee $LOG_FILE_PATH");
 system("ls -l | tee -a $LOG_FILE_PATH");
 system("perl $ZAP_HOME/scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_PATH");
+system("perl $ZAP_HOME/scripts/bin2mem.pl $TARGET_BIN_PATH $PROG_PATH");
 
 # Prepare a file list.
 system("touch $FILELIST");
@@ -86,38 +80,4 @@ sub check_ivl_version {
         }
 }
 
-sub get_vcd_path {
-        my $CONFIG_FILE = "$ZAP_HOME/includes/config.vh";
-        open(my $x, "<", $CONFIG_FILE) or die "Failed to get VCD file info from $ZAP_HOME/inclues/config.vh...!";
 
-        while(<$x>)
-        {
-                s!//.*!!g;
-        
-                if ( $_  =~ m/`define\s+VCD_FILE_PATH\s+(.*?)\s*$/ )
-                {
-                        return "$1";
-                        exit;
-                }
-        }
-
-        close($x);
-}
-
-sub get_memory_image {
-        my $CONFIG_FILE = "$ZAP_HOME/includes/config.vh";
-        open(my $y, "<", $CONFIG_FILE) or die "Failed to get memory image info...!";
-
-        while(<$y>)
-        {
-                s!//.*!!g;
-        
-                if ( $_  =~ m/`define\s+MEMORY_IMAGE\s+(.*?)\s*$/ )
-                {
-                        return "$1";
-                        exit;
-                }
-        }
-
-        close($y);
-}
