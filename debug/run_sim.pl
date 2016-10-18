@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-my $ZAP_HOME        = "/proj/ZAP";  # Modify this according to your system configuration.
+my $ZAP_HOME        = "/proj/ZAP";  # Modify this according to your system configuration. Do not add trailing slash!
 my $LOG_FILE_PATH   = "/tmp/zap.log";
 my $VVP_PATH        = "/tmp/zap.vvp";
 my $VCD_PATH        = "/tmp/zap.vcd";
