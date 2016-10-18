@@ -28,36 +28,35 @@ system("perl $ZAP_HOME/scripts/bin2mem.pl $TARGET_BIN_PATH $PROG_PATH");
 system("touch $FILELIST");
 open(FH, ">$FILELIST");
 
-print FH "
-        +incdir+$ZAP_HOME/includes/
-        $ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_ram.v
-        $ZAP_HOME/rtl/zap_alu/zap_alu_main.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_bl_fsm.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_coproc.v
-        $ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_main.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_mult_fsm.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_main.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_mem_fsm.v
-        $ZAP_HOME/rtl/zap_predecode/zap_predecode_thumb.v
-        $ZAP_HOME/rtl/zap_decode/zap_decode.v
-        $ZAP_HOME/rtl/zap_decode/zap_decode_main.v
-        $ZAP_HOME/rtl/zap_fetch/zap_fetch_main.v
-        $ZAP_HOME/rtl/zap_issue/zap_issue_main.v
-        $ZAP_HOME/rtl/zap_memory/zap_memory_main.v
-        $ZAP_HOME/rtl/zap_regf/zap_register_file.v
-        $ZAP_HOME/rtl/zap_shift/zap_multiply.v
-        $ZAP_HOME/rtl/zap_shift/zap_shifter_main.v
-        $ZAP_HOME/rtl/zap_shift/zap_shift_shifter.v
-        $ZAP_HOME/rtl/zap_shift/mult16x16.v
-        $ZAP_HOME/rtl/zap_regf/bram.v
-        $ZAP_HOME/rtl/zap_regf/bram_wrapper.v
-        $ZAP_HOME/rtl/zap_top.v
-        $ZAP_HOME/rtl/zap_alu/alu.v
-        $ZAP_HOME/rtl/zap_reset_synchronizer/zap_reset_synchronizer_main.v
-        $ZAP_HOME/models/ram/ram.v
+print FH 
+"+incdir+$ZAP_HOME/includes/
+$ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_ram.v
+$ZAP_HOME/rtl/zap_alu/zap_alu_main.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_bl_fsm.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_coproc.v
+$ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_main.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_mult_fsm.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_main.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_mem_fsm.v
+$ZAP_HOME/rtl/zap_predecode/zap_predecode_thumb.v
+$ZAP_HOME/rtl/zap_decode/zap_decode.v
+$ZAP_HOME/rtl/zap_decode/zap_decode_main.v
+$ZAP_HOME/rtl/zap_fetch/zap_fetch_main.v
+$ZAP_HOME/rtl/zap_issue/zap_issue_main.v
+$ZAP_HOME/rtl/zap_memory/zap_memory_main.v
+$ZAP_HOME/rtl/zap_regf/zap_register_file.v
+$ZAP_HOME/rtl/zap_shift/zap_multiply.v
+$ZAP_HOME/rtl/zap_shift/zap_shifter_main.v
+$ZAP_HOME/rtl/zap_shift/zap_shift_shifter.v
+$ZAP_HOME/rtl/zap_shift/mult16x16.v
+$ZAP_HOME/rtl/zap_regf/bram.v
+$ZAP_HOME/rtl/zap_regf/bram_wrapper.v
+$ZAP_HOME/rtl/zap_top.v
+$ZAP_HOME/rtl/zap_alu/alu.v
+$ZAP_HOME/rtl/zap_reset_synchronizer/zap_reset_synchronizer_main.v
 ";
 
-system("iverilog -f $FILELIST -o $VVP_PATH $ZAP_HOME/testbench/zap_test.v -g2001 -Winfloop -Wall -DSEED=$rand");
+system("iverilog -f $FILELIST -o $VVP_PATH $ZAP_HOME/testbench/zap_test.v $ZAP_HOME/models/ram/ram.v -g2001 -Winfloop -Wall -DSEED=$rand");
 system("vvp $VVP_PATH >> $LOG_FILE_PATH");
 
 # A custom perl script to analyze the output log...
