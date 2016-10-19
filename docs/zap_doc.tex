@@ -17,6 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\sloppy
 
 \title{ ZAP : An ARM v4T Compatible Soft Processor }
 \author{Revanth Kamaraj}
@@ -297,11 +298,11 @@ The prog.v file looks like this...\\\\
 \subsubsection{Invoking the simulator}
 Ensure \texttt{config.vh} is set up correctly.
 
-Your command must look like this...\\\\
+Your command must look like this (It is a single command)...\\\\
 
-\texttt{iverilog \$ZAP\_HOME/rtl/*.v \$ZAP\_HOME/rtl/*/*.v 
-\$ZAP\_HOME/testbench/*.v \$ZAP\_HOME/models/ram/ram.v -I\$ZAP\_HOME/includes  
--DSEED=22}\\\\
+\texttt{iverilog  \$ZAP\_HOME/rtl/*.v  \$ZAP\_HOME/rtl/*/*.v 
+ \$ZAP\_HOME/testbench/*.v  \$ZAP\_HOME/models/ram/ram.v  
+-I\$ZAP\_HOME/includes  -DSEED=22}\\\\
 
 The rtl/*.v and rtl/*/*.v collect all of the synthesizable Verilog-2001 files,
 the testbench/*.v collects all of the testbench (In this situations, the ram.v
