@@ -299,8 +299,9 @@ Ensure \texttt{config.vh} is set up correctly.
 
 Your command must look like this...\\\\
 
-\texttt{iverilog \$ZAP\_HOME/rtl/*.v \$ZAP\_HOME/*.v \$ZAP\_HOME/testbench/*.v
-\$ZAP\_HOME/models/ram/ram.v -DSEED=22}\\\\
+\texttt{iverilog \$ZAP\_HOME/rtl/*.v \$ZAP\_HOME/rtl/*/*.v 
+\$ZAP\_HOME/testbench/*.v \$ZAP\_HOME/models/ram/ram.v -I\$ZAP\_HOME/includes  
+-DSEED=22}\\\\
 
 The rtl/*.v and rtl/*/*.v collect all of the synthesizable Verilog-2001 files,
 the testbench/*.v collects all of the testbench (In this situations, the ram.v
