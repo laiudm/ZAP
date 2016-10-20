@@ -53,6 +53,7 @@ $ZAP_HOME/rtl/zap_regf/bram.v
 $ZAP_HOME/rtl/zap_regf/bram_wrapper.v
 $ZAP_HOME/rtl/zap_top.v
 $ZAP_HOME/rtl/zap_alu/alu.v
+$ZAP_HOME/rtl/zap_predecode/ones_counter.v
 $ZAP_HOME/rtl/zap_reset_synchronizer/zap_reset_synchronizer_main.v
 ";
 
