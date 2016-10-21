@@ -30,11 +30,10 @@ open(FH, ">$FILELIST");
 
 print FH 
 "+incdir+$ZAP_HOME/includes/
-$ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_ram.v
+$ZAP_HOME/rtl/zap_fetch/bp_ram.v
 $ZAP_HOME/rtl/zap_alu/zap_alu_main.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_bl_fsm.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_coproc.v
-$ZAP_HOME/rtl/zap_branch_predict/zap_branch_predict_main.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_mult_fsm.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_main.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_mem_fsm.v
