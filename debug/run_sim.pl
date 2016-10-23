@@ -10,8 +10,10 @@ my $VCD_PATH        = "/tmp/zap.vcd";
 my $MEMORY_IMAGE    = "/tmp/prog.v";
 my $FILELIST        = "/tmp/zap_files.list";
 my $PROG_PATH       = $MEMORY_IMAGE;
+
 my $ASM_PATH        = "$ZAP_HOME/sw/asm/prog.s";
-my $C_PATH          = "$ZAP_HOME/sw/c/prog.c";
+my $C_PATH          = "$ZAP_HOME/sw/c/fact.c";
+
 my $LINKER_PATH     = "$ZAP_HOME/scripts/linker.ld";
 my $TARGET_BIN_PATH = "/tmp/prog.bin";
 my  $rand = int rand(0xffffffff);
@@ -21,8 +23,8 @@ print "PROG_PATH = $PROG_PATH\n";
 system("rm -fv $LOG_FILE_PATH $VVP_PATH $VCD_PATH $PROG_PATH $TARGET_BIN_PATH $PROG_PATH");
 system("date | tee $LOG_FILE_PATH");
 system("ls -l | tee -a $LOG_FILE_PATH");
-system("perl $ZAP_HOME/scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_PATH");
-system("perl $ZAP_HOME/scripts/bin2mem.pl $TARGET_BIN_PATH $PROG_PATH");
+die "*E: Translation Failed!" if system("perl $ZAP_HOME/scripts/do_it.pl $ASM_PATH $C_PATH $LINKER_PATH $TARGET_BIN_PATH $PROG_PATH");
+die "*E: Bin2Mem Failed!" if system("perl $ZAP_HOME/scripts/bin2mem.pl $TARGET_BIN_PATH $PROG_PATH");
 
 # Prepare a file list.
 system("touch $FILELIST");
