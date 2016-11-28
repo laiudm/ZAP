@@ -32,7 +32,6 @@ open(FH, ">$FILELIST");
 
 print FH 
 "+incdir+$ZAP_HOME/includes/
-$ZAP_HOME/rtl/zap_fetch/bp_ram.v
 $ZAP_HOME/rtl/zap_alu/zap_alu_main.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_coproc.v
 $ZAP_HOME/rtl/zap_predecode/zap_predecode_main.v
@@ -50,19 +49,27 @@ $ZAP_HOME/rtl/zap_shift/zap_shift_shifter.v
 $ZAP_HOME/rtl/zap_shift/mult16x16.v
 $ZAP_HOME/rtl/zap_regf/bram.v
 $ZAP_HOME/rtl/zap_regf/bram_wrapper.v
-$ZAP_HOME/rtl/zap_top.v
 $ZAP_HOME/rtl/zap_alu/alu.v
 $ZAP_HOME/rtl/zap_predecode/ones_counter.v
-$ZAP_HOME/rtl/zap_reset_synchronizer/zap_reset_synchronizer_main.v
+$ZAP_HOME/lib/reset_sync.v
+$ZAP_HOME/lib/ram_simple.v
+$ZAP_HOME/lib/mem_ben_block.v
+$ZAP_HOME/lib/mem_inv_block.v
+$ZAP_HOME/rtl/zap_mmu/zap_d_mmu_cache.v
+$ZAP_HOME/rtl/zap_mmu/zap_i_mmu_cache.v
+$ZAP_HOME/rtl/zap_cp15_cb/zap_cp15_cb.v
+$ZAP_HOME/rtl/zap_top.v
+$ZAP_HOME/rtl/zap_core.v
+$ZAP_HOME/testbench/zap_test.v
+$ZAP_HOME/models/ram/model_ram.v
 ";
 
-system("iverilog -f $FILELIST -o $VVP_PATH $ZAP_HOME/testbench/zap_test.v $ZAP_HOME/models/ram/ram.v -g2001 -Winfloop -Wall -DSEED=$rand");
-system("vvp $VVP_PATH >> $LOG_FILE_PATH");
+die "*E: Verilog Compilation Failed!\n" if system("iverilog -v -f $FILELIST -o $VVP_PATH -g2001 -Winfloop -Wall -DSEED=$rand");
+die "*E: VVP execution error!\n" if system("vvp $VVP_PATH >> $LOG_FILE_PATH");
 
 # A custom perl script to analyze the output log...
-system("perl $ZAP_HOME/debug/process_log.pl $LOG_FILE_PATH");
-
-system("gtkwave $VCD_PATH &");
+die "*E:process_log.pl not found!\n" if system("perl $ZAP_HOME/debug/process_log.pl $LOG_FILE_PATH");
+die "*E: GTKWave file open Error!\n" if system("gtkwave $VCD_PATH &");
 
 sub check_ivl_version {
         my $x = `iverilog -V`;
